@@ -44,7 +44,6 @@ public class PSHoloUtil implements IHoloUtil {
         int tz = bz + 16;
         
         PlotId id = getId(gpw, bx - 16, bz - 16);
-        System.out.print(id);
         Plot plot = MainUtil.getPlot(world, id);
         
         Location signLoc = PlotSquared.getPlotManager(world).getSignLoc(gpw, plot);
