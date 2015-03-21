@@ -1,12 +1,8 @@
 package com.empcraft.holoplots;
 
-import java.util.HashSet;
-
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
@@ -15,7 +11,6 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import com.intellectualcrafters.plot.util.TaskManager;
 
 public class PacketListener {
 
@@ -30,10 +25,10 @@ public class PacketListener {
                 final Player player = event.getPlayer();
                 for (int i = 0; i < x.length; i++) {
                     final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                    TaskManager.runTaskLater(new Runnable() {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, new Runnable() {
                         @Override
                         public void run() {
-                            HoloUtil.updatePlayer(player, chunk);                        
+                            Main.HOLO.updatePlayer(player, chunk);                        
                         }
                     }, 20);
                 }
@@ -48,10 +43,10 @@ public class PacketListener {
                 final int z = packet.getIntegers().read(1);
                 final Player player = event.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
-                TaskManager.runTaskLater(new Runnable() {
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, new Runnable() {
                     @Override
                     public void run() {
-                        HoloUtil.updatePlayer(player, chunk);                        
+                        Main.HOLO.updatePlayer(player, chunk);                        
                     }
                 }, 20);
             }

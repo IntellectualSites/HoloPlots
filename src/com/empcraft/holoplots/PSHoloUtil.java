@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
+
 import com.intellectualcrafters.plot.PlotSquared;
 import com.intellectualcrafters.plot.config.C;
-import com.intellectualcrafters.plot.generator.GridPlotManager;
 import com.intellectualcrafters.plot.generator.GridPlotWorld;
 import com.intellectualcrafters.plot.generator.SquarePlotWorld;
 import com.intellectualcrafters.plot.object.Location;
@@ -21,11 +21,11 @@ import com.intellectualcrafters.plot.object.PlotWorld;
 import com.intellectualcrafters.plot.util.MainUtil;
 import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
-public class HoloUtil {
+public class PSHoloUtil implements IHoloUtil {
 
     public static HashMap<Plot, Hologram> holograms = new HashMap<Plot, Hologram>();
     
-    public static void updatePlayer(Player player, ChunkWrapper chunk) {
+    public void updatePlayer(Player player, ChunkWrapper chunk) {
         String world = chunk.world;
         if (!PlotSquared.isPlotWorld(world)) {
             return;
@@ -43,8 +43,8 @@ public class HoloUtil {
         int tx = bx + 16;
         int tz = bz + 16;
         
-        PlotId id = getId(gpw, bx, bz);
-        
+        PlotId id = getId(gpw, bx - 16, bz - 16);
+        System.out.print(id);
         Plot plot = MainUtil.getPlot(world, id);
         
         Location signLoc = PlotSquared.getPlotManager(world).getSignLoc(gpw, plot);
@@ -70,7 +70,7 @@ public class HoloUtil {
         }
     }
     
-    private static String translate(Plot plot, String string)  {
+    private String translate(Plot plot, String string)  {
         String id = plot.id.toString();
         String name;
         if (plot.owner == null) {
@@ -85,7 +85,7 @@ public class HoloUtil {
         return ChatColor.translateAlternateColorCodes('&', string.replaceAll("%id%", id).replaceAll("%plr%", name).replace("Claimed", plot.owner == null ? "" : "Claimed"));
     }
     
-    private static PlotId getId(GridPlotWorld plotworld, int x, int z) {
+    private PlotId getId(GridPlotWorld plotworld, int x, int z) {
         final SquarePlotWorld dpw = ((SquarePlotWorld) plotworld);
         final int size = plotworld.SIZE;
         int idx;

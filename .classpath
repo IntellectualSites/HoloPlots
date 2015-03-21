@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Users/Jesse Boyd/SkyDrive/Server/Test/Plugins/PlotSquared.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jesse Boyd/SkyDrive/Server/Test/spigot-1.8.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jesse Boyd/SkyDrive/Server/Test/Plugins/ProtocolLib.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jesse Boyd/Desktop/plugins/PlotMe-Core-1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
