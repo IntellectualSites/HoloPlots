@@ -44,3 +44,4 @@ Temporary Items
 *.project
 .settings/org.eclipse.jdt.core.prefs
 *.class
+.classpath

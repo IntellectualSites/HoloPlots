@@ -63,7 +63,7 @@ public class PMHoloUtil implements IHoloUtil {
         
         org.bukkit.Location loc;
         if (x > bx && x <= tx && z > bz && z <= tz) {
-            loc = new org.bukkit.Location(player.getWorld(), x + 0.5, 66 + 2, z + 0.5);
+            loc = new org.bukkit.Location(player.getWorld(), x + 0.5, 66 + 3, z + 0.5);
             Hologram hologram = holograms.get(plot);
             if (hologram == null) {
                 hologram = HologramsAPI.createHologram(Main.THIS, loc);

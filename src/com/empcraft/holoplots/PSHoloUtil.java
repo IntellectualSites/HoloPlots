@@ -2,15 +2,13 @@ package com.empcraft.holoplots;
 
 import java.util.HashMap;
 
-import net.md_5.bungee.api.ChatColor;
-
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
-
-import com.intellectualcrafters.plot.PlotSquared;
+import com.intellectualcrafters.plot.PS;
 import com.intellectualcrafters.plot.config.C;
 import com.intellectualcrafters.plot.generator.GridPlotWorld;
 import com.intellectualcrafters.plot.generator.SquarePlotWorld;
@@ -19,7 +17,7 @@ import com.intellectualcrafters.plot.object.Plot;
 import com.intellectualcrafters.plot.object.PlotId;
 import com.intellectualcrafters.plot.object.PlotWorld;
 import com.intellectualcrafters.plot.util.MainUtil;
-import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
+import com.intellectualcrafters.plot.util.UUIDHandler;
 
 public class PSHoloUtil implements IHoloUtil {
 
@@ -27,11 +25,11 @@ public class PSHoloUtil implements IHoloUtil {
     
     public void updatePlayer(Player player, ChunkWrapper chunk) {
         String world = chunk.world;
-        if (!PlotSquared.isPlotWorld(world)) {
+        if (!PS.get().isPlotWorld(world)) {
             return;
         }
         
-        PlotWorld plotworld = PlotSquared.getPlotWorld(world);
+        PlotWorld plotworld = PS.get().getPlotWorld(world);
         if (!(plotworld instanceof GridPlotWorld)) {
             return;
         }
@@ -46,14 +44,14 @@ public class PSHoloUtil implements IHoloUtil {
         PlotId id = getId(gpw, bx - 16, bz - 16);
         Plot plot = MainUtil.getPlot(world, id);
         
-        Location signLoc = PlotSquared.getPlotManager(world).getSignLoc(gpw, plot);
+        Location signLoc = PS.get().getPlotManager(world).getSignLoc(gpw, plot);
         
         int x = signLoc.getX();
         int z = signLoc.getZ();
         
         org.bukkit.Location loc;
         if (x > bx && x <= tx && z > bz && z <= tz) {
-            loc = new org.bukkit.Location(player.getWorld(), x + 0.5, signLoc.getY() + 2, z + 0.5);
+            loc = new org.bukkit.Location(player.getWorld(), x + 0.5, signLoc.getY() + 3, z + 0.5);
             Hologram hologram = holograms.get(plot);
             if (hologram == null) {
                 hologram = HologramsAPI.createHologram(Main.THIS, loc);
