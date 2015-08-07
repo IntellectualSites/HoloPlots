@@ -10,6 +10,14 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         Main.THIS = this;
+		if(Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+			getLogger().log(Level.SEVERE, "ProtocolLib required. Disabling.");
+			Bukkit.getPluginManager().disablePlugin(this);
+		}
+		if(Bukkit.getPluginManager().getPlugin("HolographicDisplays") == null) {
+			getLogger().log(Level.SEVERE, "HolographicDisplays required. Disabling.");
+			Bukkit.getPluginManager().disablePlugin(this);
+		}
         new PacketListener();
         if (Bukkit.getPluginManager().getPlugin("PlotSquared") != null) {
             HOLO = new PSHoloUtil();
