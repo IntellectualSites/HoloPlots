@@ -1,6 +1,6 @@
 main: com.empcraft.holoplots.Main
 name: HoloPlots
-version: 2.3.0
+version: 3.3.2
 author: Empire92
 description: Holograms for plots
 softdepend: [HolographicDisplays,PlotSquared,ProtocolLib,PlotMe-Core]
