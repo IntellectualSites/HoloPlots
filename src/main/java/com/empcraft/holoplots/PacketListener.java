@@ -18,8 +18,8 @@ public class PacketListener {
     public PacketListener() {
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         try {
-            PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters()
-                    .serverSide().optionAsync().types(PacketType.Play.Server.MAP_CHUNK_BULK).plugin(Main.THIS);
+            PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters().serverSide().optionAsync()
+                    .types(PacketType.Play.Server.MAP_CHUNK_BULK).listenerPriority(ListenerPriority.HIGHEST).plugin(Main.THIS);
             manager.addPacketListener(new PacketAdapter(mapChunkBulkParam) {
                 @Override
                 public void onPacketSending(final PacketEvent event) {
