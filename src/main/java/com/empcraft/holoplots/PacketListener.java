@@ -18,7 +18,9 @@ public class PacketListener {
     public PacketListener() {
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         try {
-            manager.addPacketListener(new PacketAdapter(Main.THIS, ConnectionSide.SERVER_SIDE, ListenerPriority.HIGHEST, Packets.Server.MAP_CHUNK_BULK) {
+            PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters()
+                    .serverSide().optionAsync().types(PacketType.Play.Server.MAP_CHUNK_BULK).plugin(Main.THIS);
+            manager.addPacketListener(new PacketAdapter(mapChunkBulkParam) {
                 @Override
                 public void onPacketSending(final PacketEvent event) {
                     final PacketContainer packet = event.getPacket();
@@ -27,18 +29,19 @@ public class PacketListener {
                     final Player player = event.getPlayer();
                     for (int i = 0; i < x.length; i++) {
                         final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, new Runnable() {
-                            @Override
-                            public void run() {
-                                Main.HOLO.updatePlayer(player, chunk);
-                            }
-                        }, 20);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, () ->
+                                Main.HOLO.updatePlayer(player, chunk), 20
+                        );
                     }
                 }
             });
-        } catch (Throwable ignore) {}
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
 
-        manager.addPacketListener(new PacketAdapter(Main.THIS, ListenerPriority.NORMAL, PacketType.Play.Server.MAP_CHUNK) {
+        PacketAdapter.AdapterParameteters mapChunkParam = new PacketAdapter.AdapterParameteters().optionAsync()
+                .types(PacketType.Play.Server.MAP_CHUNK).listenerPriority(ListenerPriority.NORMAL).plugin(Main.THIS);
+        manager.addPacketListener(new PacketAdapter(mapChunkParam) {
             @Override
             public void onPacketSending(final PacketEvent event) {
                 final PacketContainer packet = event.getPacket();
@@ -46,12 +49,9 @@ public class PacketListener {
                 final int z = packet.getIntegers().read(1);
                 final Player player = event.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, new Runnable() {
-                    @Override
-                    public void run() {
-                        Main.HOLO.updatePlayer(player, chunk);                        
-                    }
-                }, 20);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, () ->
+                        Main.HOLO.updatePlayer(player, chunk), 20
+                );
             }
         });
     }
