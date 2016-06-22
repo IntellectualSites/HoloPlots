@@ -1,17 +1,14 @@
 package com.empcraft.holoplots;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.Packets;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.ConnectionSide;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import com.intellectualcrafters.plot.util.TaskManager;
+import org.bukkit.entity.Player;
 
 public class PacketListener {
 
@@ -19,7 +16,7 @@ public class PacketListener {
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         try {
             PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters().serverSide().optionAsync()
-                    .types(PacketType.Play.Server.MAP_CHUNK_BULK).listenerPriority(ListenerPriority.HIGHEST).plugin(Main.THIS);
+                    .types(new PacketType[]{(PacketType) PacketType.Play.Server.class.getDeclaredField("MAP_CHUNK_BULK").get(null)}).listenerPriority(ListenerPriority.HIGHEST).plugin(Main.THIS);
             manager.addPacketListener(new PacketAdapter(mapChunkBulkParam) {
                 @Override
                 public void onPacketSending(final PacketEvent event) {
@@ -29,9 +26,12 @@ public class PacketListener {
                     final Player player = event.getPlayer();
                     for (int i = 0; i < x.length; i++) {
                         final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, () ->
-                                Main.HOLO.updatePlayer(player, chunk), 20
-                        );
+                        TaskManager.IMP.taskLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                Main.HOLO.updatePlayer(player, chunk);
+                            }
+                        }, 20);
                     }
                 }
             });
@@ -49,9 +49,12 @@ public class PacketListener {
                 final int z = packet.getIntegers().read(1);
                 final Player player = event.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.THIS, () ->
-                        Main.HOLO.updatePlayer(player, chunk), 20
-                );
+                TaskManager.IMP.taskLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Main.HOLO.updatePlayer(player, chunk);
+                    }
+                }, 20);
             }
         });
     }

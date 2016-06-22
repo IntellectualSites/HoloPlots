@@ -1,9 +1,11 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-version = '1.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = '3.4.0'
 
 configurations {
     provided
@@ -14,12 +16,16 @@ sourceSets {
 
 repositories {
     jcenter()
-    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    maven {url "http://empcraft.com/maven2"}
+    maven {url "http://repo.dmulloy2.net/content/groups/public/"}
+    maven {url "https://hub.spigotmc.org/nexus/content/groups/public/"}
 }
 
 dependencies {
     compile 'org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT'
-    compile fileTree('lib')
+    compile 'com.plotsquared:PlotSquared:3.4.1-SNAPSHOT'
+    compile 'com.comphenix.protocol:ProtocolLib-API:4.0'
+    compile 'com.gmail.filoghost.holographicdisplays:HolographicDisplays:2.2'
 }
 
 task wrapper(type: Wrapper) {
