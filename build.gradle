@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '1.0'
+
+configurations {
+    provided
+}
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+repositories {
+    jcenter()
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+}
+
+dependencies {
+    compile 'org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT'
+    compile fileTree('lib')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
