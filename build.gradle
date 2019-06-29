@@ -28,3 +28,9 @@ processResources {
         include 'plugin.yml'
     }
 }
+
+clean.doFirst {
+    delete "../target"
+}
+
+jar.destinationDir = file('./target')
