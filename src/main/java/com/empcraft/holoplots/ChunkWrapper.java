@@ -1,15 +1,15 @@
 package com.empcraft.holoplots;
 
 public class ChunkWrapper {
-    public final int    x;
-    public final int    y;
+    public final int x;
+    public final int y;
     public final String world;
 
     /**
-     * A representation of a chunk (x = chunkX y = chunkY, world = world name)<br>
-     * <br>
-     * to convert standard location to chunk:<br>
-     * x = locationX >> 4<br>
+     * A representation of a chunk (x = chunkX y = chunkY, world = world name)
+     *
+     * to convert standard location to chunk:
+     * x = locationX >> 4
      * y = locationZ >> 4
      */
     public ChunkWrapper(final int x, final int y, final String world) {
