@@ -3,5 +3,5 @@ name: HoloPlots
 version: 4.0.0
 api-version: 1.13
 authors: [Empire92, NotMyFault]
-description: Holograms for plots
-softdepend: [HolographicDisplays,PlotSquared,ProtocolLib]
+description: Holographic Plot signs
+softdepend: [HolographicDisplays, PlotSquared, ProtocolLib]
