@@ -7,7 +7,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import com.intellectualcrafters.plot.util.TaskManager;
+import com.github.intellectualsites.plotsquared.plot.util.TaskManager;
 import org.bukkit.entity.Player;
 
 public class PacketListener {
@@ -16,7 +16,7 @@ public class PacketListener {
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         try {
             PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters().serverSide().optionAsync()
-                    .types(new PacketType[]{(PacketType) PacketType.Play.Server.class.getDeclaredField("MAP_CHUNK_BULK").get(null)}).listenerPriority(ListenerPriority.HIGHEST).plugin(Main.THIS);
+                    .types((PacketType) PacketType.Play.Server.class.getDeclaredField("MAP_CHUNK_BULK").get(null)).listenerPriority(ListenerPriority.HIGHEST).plugin(Main.THIS);
             manager.addPacketListener(new PacketAdapter(mapChunkBulkParam) {
                 @Override
                 public void onPacketSending(final PacketEvent event) {

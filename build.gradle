@@ -1,33 +1,36 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-version = '3.4.0'
-
-configurations {
-    provided
-}
-sourceSets {
-    main { compileClasspath += configurations.provided }
-}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     jcenter()
-    maven {url "http://empcraft.com/maven2"}
-    maven {url "http://repo.dmulloy2.net/content/groups/public/"}
-    maven {url "https://hub.spigotmc.org/nexus/content/groups/public/"}
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://ci.athion.net/job/PlotSquared-Breaking/ws/mvn/" }
+    maven { url "https://repo.codemc.org/repository/maven-public/" }
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    maven { url "http://repo.dmulloy2.net/nexus/repository/public/" }
+    maven { url "https://jitpack.io" }
+    maven { url "http://maven.sk89q.com/repo/" }
 }
 
 dependencies {
-    compile 'org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT'
-    compile 'com.plotsquared:PlotSquared:3.4.1-SNAPSHOT'
-    compile 'com.comphenix.protocol:ProtocolLib-API:4.0'
-    compile 'com.gmail.filoghost.holographicdisplays:HolographicDisplays:2.2'
+    compile 'com.github.intellectualsites.plotsquared:PlotSquared-API:latest'
+    implementation 'org.spigotmc:spigot-api:1.14.3-R0.1-SNAPSHOT'
+    compile 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.3.3-SNAPSHOT'
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0-SNAPSHOT"
+    compile(group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.0.0')
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.9'
+processResources {
+    from('src/main/resources') {
+        include 'plugin.yml'
+    }
 }
+
+clean.doFirst {
+    delete "../target"
+}
+
+jar.destinationDir = file('./target')
