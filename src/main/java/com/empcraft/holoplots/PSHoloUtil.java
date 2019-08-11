@@ -57,10 +57,10 @@ public class PSHoloUtil implements IHoloUtil {
                     holograms.put(plot, hologram);
                 }
                 hologram.clearLines();
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_1.s()));
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_2.s()));
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_3.s()));
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_4.s()));
+                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_1.toString()));
+                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_2.toString()));
+                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_3.toString()));
+                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_4.toString()));
                 VisibilityManager visibilityManager = hologram.getVisibilityManager();
                 visibilityManager.showTo(player);
             }
@@ -70,7 +70,7 @@ public class PSHoloUtil implements IHoloUtil {
     private String translate(Plot plot, String string) {
         String id = plot.getId().toString();
         String name;
-        if (plot.owner == null) {
+        if (plot.getOwners() == null) {
             name = "unowned";
         } else {
             name = UUIDHandler.getName(plot.owner);
@@ -78,6 +78,6 @@ public class PSHoloUtil implements IHoloUtil {
         if (name == null) {
             name = "unknown";
         }
-        return ChatColor.translateAlternateColorCodes('&', string.replaceAll("%id%", id).replaceAll("%plr%", name).replace("Claimed", plot.owner == null ? "" : "Claimed"));
+        return ChatColor.translateAlternateColorCodes('&', string.replaceAll("%id%", id).replaceAll("%plr%", name).replace("Claimed", plot.getOwners() == null ? "" : "Claimed"));
     }
 }
