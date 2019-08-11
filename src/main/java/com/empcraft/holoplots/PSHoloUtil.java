@@ -61,8 +61,8 @@ public class PSHoloUtil implements IHoloUtil {
                 hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_2.s()));
                 hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_3.s()));
                 hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_4.s()));
-                VisibilityManager visiblityManager = hologram.getVisibilityManager();
-                visiblityManager.showTo(player);
+                VisibilityManager visibilityManager = hologram.getVisibilityManager();
+                visibilityManager.showTo(player);
             }
         }
     }
