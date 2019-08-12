@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class PSHoloUtil implements IHoloUtil {
 
-    public static HashMap<Plot, Hologram> holograms = new HashMap<Plot, Hologram>();
+    public static HashMap<Plot, Hologram> holograms = new HashMap<>();
 
     @Override
     public void updatePlayer(Player player, ChunkWrapper chunk) {
