@@ -18,9 +18,9 @@ repositories {
 dependencies {
     compile 'com.github.intellectualsites.plotsquared:PlotSquared-API:latest'
     compile 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
-    compile 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.3.3-SNAPSHOT'
+    compile 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0'
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0-SNAPSHOT"
-    compile(group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.0.0')
+    compile(group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.0.1')
 }
 
 processResources {
