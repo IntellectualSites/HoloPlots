@@ -1,3 +1,11 @@
 # HoloPlots
-Holograms for PlotSquared
+Holograms for PlotSquared Version v4 (1.13.2+)
 https://www.spigotmc.org/resources/holoplots.4880/
+
+## Dependencies
+You need to install the following plugins in order to use HoloPlots:
+- [PlotSquared](https://www.spigotmc.org/resources/holoplots.4880/)
+- [HolographicDisplays](https://dev.bukkit.org/projects/holographic-displays/files)
+- [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)
+
+Support is available on [discord](https://discord.gg/5h3n38H). If you found an issue or want to add a feature, feel free to open an issue or raise a pull request.

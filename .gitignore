@@ -1,5 +1,4 @@
 .DS_STORE
-.server*/
 .gradle/
 build/
 *.iml
@@ -14,18 +13,6 @@ build/
 */dist/lib/spigot*.jar
 */build
 */nbproject
-.metadata/
-.recommenders/
-converdonatorranks/
-SkyblockUUIDPopulator/
-BarAPI/
-ChestShop/
-ChestShop-3/
-RedeemMCMMO/
-Stuff/
-SkyWars/
-uaconv/
-uSkyBlock/
 *.prefs
 *.class
 .project

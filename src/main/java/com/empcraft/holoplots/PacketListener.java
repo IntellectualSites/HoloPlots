@@ -26,12 +26,7 @@ public class PacketListener {
                     final Player player = event.getPlayer();
                     for (int i = 0; i < x.length; i++) {
                         final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                        TaskManager.IMP.taskLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                Main.HOLO.updatePlayer(player, chunk);
-                            }
-                        }, 20);
+                        TaskManager.IMP.taskLater(() -> Main.HOLO.updatePlayer(player, chunk), 20);
                     }
                 }
             });
@@ -49,12 +44,7 @@ public class PacketListener {
                 final int z = packet.getIntegers().read(1);
                 final Player player = event.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
-                TaskManager.IMP.taskLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Main.HOLO.updatePlayer(player, chunk);
-                    }
-                }, 20);
+                TaskManager.IMP.taskLater(() -> Main.HOLO.updatePlayer(player, chunk), 20);
             }
         });
     }

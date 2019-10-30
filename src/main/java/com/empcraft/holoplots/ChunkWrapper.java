@@ -19,17 +19,17 @@ public class ChunkWrapper {
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
+    public boolean equals(final Object object) {
+        if (this == object) {
             return true;
         }
-        if (obj == null) {
+        if (object == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != object.getClass()) {
             return false;
         }
-        final ChunkWrapper other = (ChunkWrapper) obj;
+        final ChunkWrapper other = (ChunkWrapper) object;
         return ((this.x == (other.x)) && (this.y == (other.y)) && (this.world.equals(other.world)));
     }
 
