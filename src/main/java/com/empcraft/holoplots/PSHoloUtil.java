@@ -6,11 +6,12 @@ import com.github.intellectualsites.plotsquared.plot.generator.GridPlotWorld;
 import com.github.intellectualsites.plotsquared.plot.object.Location;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.github.intellectualsites.plotsquared.plot.object.PlotArea;
-import com.github.intellectualsites.plotsquared.plot.object.RegionWrapper;
 import com.github.intellectualsites.plotsquared.plot.util.UUIDHandler;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -26,7 +27,9 @@ public class PSHoloUtil implements IHoloUtil {
         String world = chunk.world;
         int bx = chunk.x << 4;
         int bz = chunk.y << 4;
-        RegionWrapper region = new RegionWrapper(bx - 1, bx + 16, bz - 1, bz + 16);
+        BlockVector3 pos1 = BlockVector3.at(bx - 1, 0, bz - 1);
+        BlockVector3 pos2 = BlockVector3.at(bx + 16, 255, bz + 16);
+        CuboidRegion region = new CuboidRegion(pos1, pos2);
         Set<PlotArea> areas = PlotSquared.get().getPlotAreas(world, region);
         if (areas.size() == 0) {
             return;
@@ -38,7 +41,7 @@ public class PSHoloUtil implements IHoloUtil {
             GridPlotWorld gpw = (GridPlotWorld) area;
             Plot plot = gpw.getOwnedPlotAbs(new Location(area.worldname, bx, 0, bz + 1));
             if (plot == null) {
-                plot = gpw.getOwnedPlotAbs(new Location(area.worldname, region.maxX, 0, region.maxZ + 1));
+                plot = gpw.getOwnedPlotAbs(new Location(area.worldname, pos2.getX(), 0, pos2.getZ() + 1));
             }
             if (plot == null || !plot.isBasePlot()) {
                 continue;
@@ -49,7 +52,7 @@ public class PSHoloUtil implements IHoloUtil {
             int z = sign.getZ();
 
             org.bukkit.Location loc;
-            if (x > region.minX && x < region.maxX && z > region.minZ && z < region.maxZ) {
+            if (x > pos1.getX() && x < pos2.getX() && z > pos1.getZ() && z < pos2.getZ()) {
                 loc = new org.bukkit.Location(player.getWorld(), x + 0.5, sign.getY() + 3, z + 0.5);
                 Hologram hologram = holograms.get(plot);
                 if (hologram == null) {
