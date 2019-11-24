@@ -1,8 +1,8 @@
 ---
-name: Bug/Issue report for PlotSquared
+name: Bug/Issue report for HoloPlots
 about: Bug / Issue report about this plugin
 title: ''
-labels: ''
+labels: "[?] Testing Required"
 assignees: ''
 
 ---
