@@ -20,7 +20,7 @@ public class Main extends JavaPlugin {
         }
         if (Bukkit.getPluginManager().getPlugin("HolographicDisplays") == null) {
             getLogger().log(Level.SEVERE, "HolographicDisplays required. Disabling HoloPlots.");
-            getLogger().log(Level.SEVERE, "https://dev.bukkit.org/projects/holographic-displays/files/2652670");
+            getLogger().log(Level.SEVERE, "https://dev.bukkit.org/projects/holographic-displays/files/2859237");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }

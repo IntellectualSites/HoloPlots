@@ -12,15 +12,15 @@ repositories {
     maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
     maven { url "http://repo.dmulloy2.net/nexus/repository/public/" }
     maven { url "https://jitpack.io" }
-    maven { url "http://maven.sk89q.com/repo/" }
+    maven { url "http://maven.enginehub.org/repo/" }
 }
 
 dependencies {
     compile 'com.github.intellectualsites.plotsquared:PlotSquared-API:latest'
-    compile 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
-    compile 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0'
-    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0-SNAPSHOT"
-    compile(group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.0.1')
+    compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+    compile 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.2-SNAPSHOT'
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.1-SNAPSHOT"
+    compile(group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.1.0-SNAPSHOT')
 }
 
 processResources {
