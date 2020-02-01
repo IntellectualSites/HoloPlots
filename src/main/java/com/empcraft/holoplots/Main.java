@@ -2,12 +2,14 @@ package com.empcraft.holoplots;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.empcraft.holoplots.Metrics;
 
 import java.util.logging.Level;
 
 public class Main extends JavaPlugin {
     public static Main THIS;
     public static IHoloUtil HOLO = null;
+    private static final int BSTATS_ID = 6402;
 
     @Override
     public void onEnable() {
@@ -34,6 +36,7 @@ public class Main extends JavaPlugin {
         if (Bukkit.getPluginManager().getPlugin("PlotSquared") != null) {
             HOLO = new PSHoloUtil();
         }
-
+        // Enable metrics
+        new Metrics(this, BSTATS_ID);
     }
 }
