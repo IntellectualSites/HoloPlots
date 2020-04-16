@@ -1,15 +1,15 @@
 package com.empcraft.holoplots;
 
-import com.github.intellectualsites.plotsquared.plot.PlotSquared;
-import com.github.intellectualsites.plotsquared.plot.config.Captions;
-import com.github.intellectualsites.plotsquared.plot.generator.GridPlotWorld;
-import com.github.intellectualsites.plotsquared.plot.object.Location;
-import com.github.intellectualsites.plotsquared.plot.object.Plot;
-import com.github.intellectualsites.plotsquared.plot.object.PlotArea;
-import com.github.intellectualsites.plotsquared.plot.util.UUIDHandler;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
+import com.plotsquared.core.PlotSquared;
+import com.plotsquared.core.configuration.Captions;
+import com.plotsquared.core.generator.GridPlotWorld;
+import com.plotsquared.core.location.Location;
+import com.plotsquared.core.plot.Plot;
+import com.plotsquared.core.plot.PlotArea;
+import com.plotsquared.core.util.uuid.UUIDHandler;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.ChatColor;
@@ -39,9 +39,9 @@ public class PSHoloUtil implements IHoloUtil {
                 continue;
             }
             GridPlotWorld gpw = (GridPlotWorld) area;
-            Plot plot = gpw.getOwnedPlotAbs(new Location(area.worldname, bx, 0, bz + 1));
+            Plot plot = gpw.getOwnedPlotAbs(new Location(area.getWorldName(), bx, 0, bz + 1));
             if (plot == null) {
-                plot = gpw.getOwnedPlotAbs(new Location(area.worldname, pos2.getX(), 0, pos2.getZ() + 1));
+                plot = gpw.getOwnedPlotAbs(new Location(area.getWorldName(), pos2.getX(), 0, pos2.getZ() + 1));
             }
             if (plot == null || !plot.isBasePlot()) {
                 continue;
@@ -76,7 +76,7 @@ public class PSHoloUtil implements IHoloUtil {
         if (plot.getOwners() == null) {
             name = "unowned";
         } else {
-            name = UUIDHandler.getName(plot.owner);
+            name = UUIDHandler.getName(plot.getOwnerAbs());
         }
         if (name == null) {
             name = "unknown";

@@ -13,10 +13,11 @@ repositories {
     maven { url "http://repo.dmulloy2.net/nexus/repository/public/" }
     maven { url "https://jitpack.io" }
     maven { url "http://maven.enginehub.org/repo/" }
+    maven { url "https://plotsquared.com/mvn/" }
 }
 
 dependencies {
-    compile 'com.github.intellectualsites.plotsquared:PlotSquared-API:latest'
+    compile 'com.plotsquared:PlotSquared:5.1'
     compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
     compile 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.2-SNAPSHOT'
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.1-SNAPSHOT"

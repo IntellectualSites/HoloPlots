@@ -7,7 +7,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import com.github.intellectualsites.plotsquared.plot.util.TaskManager;
+import com.plotsquared.core.util.task.TaskManager;
 import org.bukkit.entity.Player;
 
 public class PacketListener {
