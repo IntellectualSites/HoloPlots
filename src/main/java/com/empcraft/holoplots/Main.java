@@ -28,7 +28,7 @@ public class Main extends JavaPlugin {
         }
         if (Bukkit.getPluginManager().getPlugin("PlotSquared") == null) {
             getLogger().log(Level.SEVERE, "You can't run HoloPlots without PlotSquared. Disabling HoloPlots.");
-            getLogger().log(Level.SEVERE, "https://www.spigotmc.org/resources/plotsquared.1177/");
+            getLogger().log(Level.SEVERE, "https://www.spigotmc.org/resources/77506/");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
