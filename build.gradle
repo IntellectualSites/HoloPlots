@@ -23,9 +23,15 @@ dependencies {
     "implementation"("com.sk89q.worldedit:worldedit-bukkit:7.1.0")
 }
 
+version = "5.0"
+
 processResources {
     from('src/main/resources') {
         include 'plugin.yml'
+        expand(
+                version: project.version
+        )
+        include 'config.yml'
     }
 }
 

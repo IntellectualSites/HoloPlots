@@ -1,0 +1,4 @@
+# Send anonymous usage statistics about HoloPlots to https://bstats.org/
+metrics:
+  bstats: true
+# The holograms are customized withing the language files of PlotSquared.
