@@ -16,6 +16,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class PSHoloUtil implements IHoloUtil {
@@ -44,6 +45,15 @@ public class PSHoloUtil implements IHoloUtil {
                 plot = gpw.getOwnedPlotAbs(new Location(area.getWorldName(), pos2.getX(), 0, pos2.getZ() + 1));
             }
             if (plot == null || !plot.isBasePlot()) {
+                if (plot == null) {
+                    for (Map.Entry<Plot, Hologram> e: holograms.entrySet()) {
+                        if (e.getKey().getArea().equals(area)) {
+                            e.getValue().delete();
+                            holograms.remove(e.getKey());
+                            break;
+                        }
+                    }
+                }
                 continue;
             }
             Location sign = area.getPlotManager().getSignLoc(plot);
