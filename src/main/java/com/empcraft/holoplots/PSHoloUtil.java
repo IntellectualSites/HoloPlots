@@ -8,6 +8,7 @@ import com.plotsquared.core.generator.GridPlotWorld;
 import com.plotsquared.core.location.Location;
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.core.plot.PlotArea;
+import com.plotsquared.core.util.task.TaskManager;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.Bukkit;
@@ -53,17 +54,31 @@ public class PSHoloUtil implements IHoloUtil {
             org.bukkit.Location loc;
             if (x > pos1.getX() && x < pos2.getX() && z > pos1.getZ() && z < pos2.getZ()) {
                 loc = new org.bukkit.Location(player.getWorld(), x + 0.5, sign.getY() + 3, z + 0.5);
-                Hologram hologram = holograms.get(plot);
-                if (hologram == null) {
+
+                final Hologram hologram;
+                if (!holograms.containsKey(plot)) {
                     hologram = HologramsAPI.createHologram(Main.THIS, loc);
                     holograms.put(plot, hologram);
+                } else {
+                    hologram = holograms.get(plot);
                 }
-                hologram.clearLines();
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_1.getTranslated()));
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_2.getTranslated()));
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_3.getTranslated()));
-                hologram.appendTextLine(translate(plot, Captions.OWNER_SIGN_LINE_4.getTranslated()));
-                hologram.getVisibilityManager().showTo(player);
+
+                // Call translate async as it might do HTTP requests
+                final Plot finalPlot = plot;
+                TaskManager.IMP.taskAsync(() -> {
+                    String line1 = translate(finalPlot, Captions.OWNER_SIGN_LINE_1.getTranslated());
+                    String line2 = translate(finalPlot, Captions.OWNER_SIGN_LINE_2.getTranslated());
+                    String line3 = translate(finalPlot, Captions.OWNER_SIGN_LINE_3.getTranslated());
+                    String line4 = translate(finalPlot, Captions.OWNER_SIGN_LINE_4.getTranslated());
+                    TaskManager.IMP.task(() -> {
+                        hologram.clearLines();
+                        hologram.appendTextLine(line1);
+                        hologram.appendTextLine(line2);
+                        hologram.appendTextLine(line3);
+                        hologram.appendTextLine(line4);
+                        hologram.getVisibilityManager().showTo(player);
+                    });
+                });
             }
         }
     }
@@ -79,6 +94,7 @@ public class PSHoloUtil implements IHoloUtil {
         if (name == null) {
             name = "unknown";
         }
-        return ChatColor.translateAlternateColorCodes('&', string.replaceAll("%id%", id).replaceAll("%plr%", name).replace("Claimed", plot.getOwners() == null ? "" : "Claimed"));
+        return ChatColor.translateAlternateColorCodes('&', string.replaceAll("%id%", id)
+                .replaceAll("%plr%", name).replace("Claimed", plot.getOwners() == null ? "" : "Claimed"));
     }
 }
