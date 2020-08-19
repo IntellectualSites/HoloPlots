@@ -32,9 +32,7 @@ public class Main extends JavaPlugin {
             return;
         }
         new PacketListener();
-        if (Bukkit.getPluginManager().getPlugin("PlotSquared") != null) {
-            HOLO = new PSHoloUtil();
-        }
+        HOLO = new PSHoloUtil();
         // Enable metrics
         new Metrics(this, BSTATS_ID);
     }
