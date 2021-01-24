@@ -27,7 +27,7 @@ repositories {
 dependencies {
     compileOnly("com.plotsquared:PlotSquared-Core:5.13.3")
     compileOnlyApi("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
-    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.5")
+    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.6")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT")
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.2")
 }
