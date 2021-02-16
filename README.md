@@ -9,4 +9,4 @@ You need to install the following plugins in order to use HoloPlots:
 - [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)
 
 ## Download HoloPlots
-Support is available on [discord](https://discord.gg/5h3n38H). If you found an issue or want to add a feature, feel free to open an issue or raise a pull request.
+Support is available on [discord](https://discord.gg/intellectualsites). If you found an issue or want to add a feature, feel free to open an issue or raise a pull request.
