@@ -1,9 +1,11 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("java")
     id("java-library")
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
 configure<JavaPluginConvention> {
@@ -14,7 +16,6 @@ configure<JavaPluginConvention> {
 version = "5.1.1"
 
 repositories {
-    jcenter()
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
@@ -30,6 +31,8 @@ dependencies {
     compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.6")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.6.0")
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.2")
+    implementation("org.bstats:bstats-bukkit:2.2.1")
+    implementation("org.bstats:bstats-base:2.2.1")
 }
 
 bukkit {
@@ -41,4 +44,19 @@ bukkit {
     version = rootProject.version.toString()
     softDepend = listOf("HolographicDisplays", "PlotSquared", "ProtocolLib")
     website = "https://www.spigotmc.org/resources/4880/"
+}
+
+tasks.named<ShadowJar>("shadowJar") {
+    archiveClassifier.set(null as String?)
+    dependencies {
+        relocate("org.bstats", "com.empcraft.holoplots.metrics") {
+            include(dependency("org.bstats:bstats-base"))
+            include(dependency("org.bstats:bstats-bukkit"))
+        }
+    }
+    minimize()
+}
+
+tasks.named("build").configure {
+    dependsOn("shadowJar")
 }
