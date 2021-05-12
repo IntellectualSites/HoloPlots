@@ -1,8 +1,0 @@
-main: com.empcraft.holoplots.Main
-name: HoloPlots
-version: "${version}"
-api-version: "1.13"
-authors: [Empire92, NotMyFault]
-website: "https://intellectualsites.github.io/download/"
-description: Holographic Plot signs
-softdepend: [HolographicDisplays, PlotSquared, ProtocolLib]

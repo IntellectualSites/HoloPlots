@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: IntellectualSites Discord
+    url: https://discord.gg/intellectualsites
+    about: Our support Discord, please ask questions and seek support here.
+  - name: PlotSquared Wiki
+    url: https://github.com/IntellectualSites/PlotSquared/wiki
+    about: Take a look at the wiki page for instructions how to setup PlotSquared and use its commands.
