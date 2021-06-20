@@ -1,4 +1,3 @@
-import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
@@ -8,12 +7,13 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = sourceCompatibility
+plugins.withId("java") {
+    the<JavaPluginExtension>().toolchain {
+        languageVersion.set(JavaLanguageVersion.of(16))
+    }
 }
 
-version = "5.1.1"
+version = "6.0.0"
 
 repositories {
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
@@ -26,11 +26,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.plotsquared:PlotSquared-Core:5.13.11")
-    compileOnlyApi("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
-    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.6")
+    compileOnly("com.plotsquared:PlotSquared-Bukkit:6.0.0-SNAPSHOT")
+    compileOnly("com.plotsquared:PlotSquared-Core:6.0.0-SNAPSHOT")
+    compileOnlyApi("org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT")
+    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.7")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.6.0")
-    compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.5")
+    compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.0-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:2.2.1")
     implementation("org.bstats:bstats-base:2.2.1")
 }
@@ -38,7 +39,7 @@ dependencies {
 bukkit {
     name = "HoloPlots"
     main = "com.empcraft.holoplots.Main"
-    authors = listOf("Empire92", "NotMyFault")
+    authors = listOf("Empire92", "NotMyFault", "dordsor21")
     apiVersion = "1.13"
     description = "Holographic Plot signs"
     version = rootProject.version.toString()

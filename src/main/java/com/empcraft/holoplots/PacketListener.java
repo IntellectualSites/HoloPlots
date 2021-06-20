@@ -8,6 +8,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.plotsquared.core.util.task.TaskManager;
+import com.plotsquared.core.util.task.TaskTime;
 import org.bukkit.entity.Player;
 
 public class PacketListener {
@@ -26,7 +27,8 @@ public class PacketListener {
                     final Player player = event.getPlayer();
                     for (int i = 0; i < x.length; i++) {
                         final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                        TaskManager.IMP.taskLater(() -> Main.HOLO.updatePlayer(player, chunk), 20);
+                        TaskManager.getPlatformImplementation().taskLater(() -> Main.HOLO.updatePlayer(player, chunk), TaskTime
+                            .ticks(20));
                     }
                 }
             });
@@ -44,7 +46,8 @@ public class PacketListener {
                 final int z = packet.getIntegers().read(1);
                 final Player player = event.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
-                TaskManager.IMP.taskLater(() -> Main.HOLO.updatePlayer(player, chunk), 20);
+                TaskManager.getPlatformImplementation().taskLater(() -> Main.HOLO.updatePlayer(player, chunk), TaskTime
+                    .ticks(20));
             }
         });
     }
