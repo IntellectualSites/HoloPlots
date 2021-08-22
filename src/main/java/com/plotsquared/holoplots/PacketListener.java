@@ -17,7 +17,8 @@ public class PacketListener {
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         try {
             PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters().serverSide().optionAsync()
-                    .types((PacketType) PacketType.Play.Server.class.getDeclaredField("MAP_CHUNK_BULK").get(null)).listenerPriority(ListenerPriority.HIGHEST).plugin(Main.THIS);
+                    .types((PacketType) PacketType.Play.Server.class.getDeclaredField("MAP_CHUNK_BULK").get(null)).listenerPriority(ListenerPriority.HIGHEST).plugin(
+                    HoloPlotsPlugin.THIS);
             manager.addPacketListener(new PacketAdapter(mapChunkBulkParam) {
                 @Override
                 public void onPacketSending(final PacketEvent event) {
@@ -27,7 +28,7 @@ public class PacketListener {
                     final Player player = event.getPlayer();
                     for (int i = 0; i < x.length; i++) {
                         final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                        TaskManager.getPlatformImplementation().taskLater(() -> Main.HOLO.updatePlayer(player, chunk), TaskTime
+                        TaskManager.getPlatformImplementation().taskLater(() -> HoloPlotsPlugin.HOLO.updatePlayer(player, chunk), TaskTime
                             .ticks(20));
                     }
                 }
@@ -37,7 +38,8 @@ public class PacketListener {
         }
 
         PacketAdapter.AdapterParameteters mapChunkParam = new PacketAdapter.AdapterParameteters().optionAsync()
-                .types(PacketType.Play.Server.MAP_CHUNK).listenerPriority(ListenerPriority.NORMAL).plugin(Main.THIS);
+                .types(PacketType.Play.Server.MAP_CHUNK).listenerPriority(ListenerPriority.NORMAL).plugin(
+                HoloPlotsPlugin.THIS);
         manager.addPacketListener(new PacketAdapter(mapChunkParam) {
             @Override
             public void onPacketSending(final PacketEvent event) {
@@ -46,7 +48,7 @@ public class PacketListener {
                 final int z = packet.getIntegers().read(1);
                 final Player player = event.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
-                TaskManager.getPlatformImplementation().taskLater(() -> Main.HOLO.updatePlayer(player, chunk), TaskTime
+                TaskManager.getPlatformImplementation().taskLater(() -> HoloPlotsPlugin.HOLO.updatePlayer(player, chunk), TaskTime
                     .ticks(20));
             }
         });

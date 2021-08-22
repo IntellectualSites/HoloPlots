@@ -57,7 +57,7 @@ public class PSHoloUtil implements IHoloUtil {
 
                 final Hologram hologram;
                 if (!holograms.containsKey(plot)) {
-                    hologram = HologramsAPI.createHologram(Main.THIS, loc);
+                    hologram = HologramsAPI.createHologram(HoloPlotsPlugin.THIS, loc);
                     holograms.put(plot, hologram);
                 } else {
                     hologram = holograms.get(plot);
