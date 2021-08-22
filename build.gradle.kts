@@ -35,7 +35,7 @@ dependencies {
 
 bukkit {
     name = "HoloPlots"
-    main = "com.plotsquared.holoplots.Main"
+    main = "com.plotsquared.holoplots.HoloPlotsPlugin"
     authors = listOf("Empire92", "NotMyFault", "dordsor21")
     apiVersion = "1.13"
     description = "Holographic Plot signs"
