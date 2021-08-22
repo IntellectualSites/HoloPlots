@@ -2,8 +2,9 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    id("java")
-    id("java-library")
+    java
+    `java-library`
+
     id("net.minecrell.plugin-yml.bukkit") version "0.4.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
@@ -11,8 +12,6 @@ plugins {
 the<JavaPluginExtension>().toolchain {
     languageVersion.set(JavaLanguageVersion.of(16))
 }
-
-version = "6.0.0"
 
 repositories {
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
@@ -27,7 +26,7 @@ repositories {
 dependencies {
     compileOnly("com.plotsquared:PlotSquared-Bukkit:6.0.9-SNAPSHOT")
     compileOnlyApi("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
-    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.8")
+    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.7.0")
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.0-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:2.2.1")
@@ -41,7 +40,7 @@ bukkit {
     apiVersion = "1.13"
     description = "Holographic Plot signs"
     version = rootProject.version.toString()
-    softDepend = listOf("HolographicDisplays", "PlotSquared", "ProtocolLib")
+    depend = listOf("HolographicDisplays", "PlotSquared", "ProtocolLib")
     website = "https://www.spigotmc.org/resources/4880/"
 }
 
