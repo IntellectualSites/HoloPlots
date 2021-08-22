@@ -15,28 +15,6 @@ public class PacketListener {
 
     public PacketListener() {
         final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
-        try {
-            PacketAdapter.AdapterParameteters mapChunkBulkParam = new PacketAdapter.AdapterParameteters().serverSide().optionAsync()
-                    .types((PacketType) PacketType.Play.Server.class.getDeclaredField("MAP_CHUNK_BULK").get(null)).listenerPriority(ListenerPriority.HIGHEST).plugin(
-                    HoloPlotsPlugin.THIS);
-            manager.addPacketListener(new PacketAdapter(mapChunkBulkParam) {
-                @Override
-                public void onPacketSending(final PacketEvent event) {
-                    final PacketContainer packet = event.getPacket();
-                    final int[] x = packet.getIntegerArrays().read(0);
-                    final int[] z = packet.getIntegerArrays().read(1);
-                    final Player player = event.getPlayer();
-                    for (int i = 0; i < x.length; i++) {
-                        final ChunkWrapper chunk = new ChunkWrapper(x[i], z[i], player.getWorld().getName());
-                        TaskManager.getPlatformImplementation().taskLater(() -> HoloPlotsPlugin.HOLO.updatePlayer(player, chunk), TaskTime
-                            .ticks(20));
-                    }
-                }
-            });
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
         PacketAdapter.AdapterParameteters mapChunkParam = new PacketAdapter.AdapterParameteters().optionAsync()
                 .types(PacketType.Play.Server.MAP_CHUNK).listenerPriority(ListenerPriority.NORMAL).plugin(
                 HoloPlotsPlugin.THIS);
