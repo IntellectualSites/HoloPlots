@@ -1,3 +1,4 @@
+import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
@@ -7,10 +8,8 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
-plugins.withId("java") {
-    the<JavaPluginExtension>().toolchain {
-        languageVersion.set(JavaLanguageVersion.of(16))
-    }
+the<JavaPluginExtension>().toolchain {
+    languageVersion.set(JavaLanguageVersion.of(16))
 }
 
 version = "6.0.0"
@@ -26,11 +25,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.plotsquared:PlotSquared-Bukkit:6.0.0-SNAPSHOT")
-    compileOnly("com.plotsquared:PlotSquared-Core:6.0.0-SNAPSHOT")
-    compileOnlyApi("org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT")
-    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.7")
-    compileOnly("com.comphenix.protocol:ProtocolLib:4.6.0")
+    compileOnly("com.plotsquared:PlotSquared-Bukkit:6.0.9-SNAPSHOT")
+    compileOnlyApi("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
+    compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.8")
+    compileOnly("com.comphenix.protocol:ProtocolLib:4.7.0")
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.0-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:2.2.1")
     implementation("org.bstats:bstats-base:2.2.1")
@@ -38,7 +36,7 @@ dependencies {
 
 bukkit {
     name = "HoloPlots"
-    main = "com.empcraft.holoplots.Main"
+    main = "com.plotsquared.holoplots.Main"
     authors = listOf("Empire92", "NotMyFault", "dordsor21")
     apiVersion = "1.13"
     description = "Holographic Plot signs"
@@ -50,10 +48,11 @@ bukkit {
 tasks.named<ShadowJar>("shadowJar") {
     archiveClassifier.set(null as String?)
     dependencies {
-        relocate("org.bstats", "com.empcraft.holoplots.metrics") {
+        relocate("org.bstats", "com.plotsquared.holoplots.metrics") {
             include(dependency("org.bstats:bstats-base"))
             include(dependency("org.bstats:bstats-bukkit"))
         }
+        relocate("net.kyori.adventure", "com.plotsquared.core.configuration.adventure")
     }
     minimize()
 }

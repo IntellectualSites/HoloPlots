@@ -1,4 +1,4 @@
-package com.empcraft.holoplots;
+package com.plotsquared.holoplots;
 
 import org.bukkit.entity.Player;
 

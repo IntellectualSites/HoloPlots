@@ -1,4 +1,4 @@
-package com.empcraft.holoplots;
+package com.plotsquared.holoplots;
 
 public class ChunkWrapper {
     public final int x;

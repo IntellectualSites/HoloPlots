@@ -1,4 +1,4 @@
-package com.empcraft.holoplots;
+package com.plotsquared.holoplots;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;

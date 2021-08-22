@@ -1,4 +1,4 @@
-package com.empcraft.holoplots;
+package com.plotsquared.holoplots;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

@@ -1,7 +1,8 @@
-package com.empcraft.holoplots;
+package com.plotsquared.holoplots;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+import com.plotsquared.bukkit.util.BukkitUtil;
 import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.configuration.caption.Caption;
 import com.plotsquared.core.configuration.caption.LocaleHolder;
@@ -13,19 +14,12 @@ import com.plotsquared.core.plot.PlotArea;
 import com.plotsquared.core.util.task.TaskManager;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.Template;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
 import java.util.HashMap;
 
 public class PSHoloUtil implements IHoloUtil {
-
-    public static final LegacyComponentSerializer LEGACY_COMPONENT_SERIALIZER = LegacyComponentSerializer.legacySection();
-    public static final MiniMessage MINI_MESSAGE = MiniMessage.builder().build();
 
     public static HashMap<Plot, Hologram> holograms = new HashMap<>();
 
@@ -42,10 +36,9 @@ public class PSHoloUtil implements IHoloUtil {
             return;
         }
         for (PlotArea area : areas) {
-            if (!(area instanceof GridPlotWorld)) {
+            if (!(area instanceof GridPlotWorld gpw)) {
                 continue;
             }
-            GridPlotWorld gpw = (GridPlotWorld) area;
             Plot plot = gpw.getOwnedPlotAbs(Location.at(area.getWorldName(), BlockVector3.at(bx, 0, bz + 1), 0, 0));
             if (plot == null) {
                 plot = gpw.getOwnedPlotAbs(Location.at(area.getWorldName(), BlockVector3.at(pos2.getX(), 0, pos2.getZ() + 1), 0, 0));
@@ -101,7 +94,7 @@ public class PSHoloUtil implements IHoloUtil {
         if (name == null) {
             name = "unknown";
         }
-        return LEGACY_COMPONENT_SERIALIZER.serialize(MINI_MESSAGE.parse(caption.getComponent(LocaleHolder.console()), Template.of("id", id),
+        return BukkitUtil.LEGACY_COMPONENT_SERIALIZER.serialize(BukkitUtil.MINI_MESSAGE.parse(caption.getComponent(LocaleHolder.console()), Template.of("id", id),
             Template.of("owner", name))).replace("Claimed", plot.getOwnerAbs() == null ? "" : "Claimed");
     }
 }
