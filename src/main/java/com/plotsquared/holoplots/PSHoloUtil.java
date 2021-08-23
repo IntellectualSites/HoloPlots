@@ -17,6 +17,7 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import net.kyori.adventure.text.minimessage.Template;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 
 public class PSHoloUtil implements IHoloUtil {
@@ -24,10 +25,10 @@ public class PSHoloUtil implements IHoloUtil {
     public static HashMap<Plot, Hologram> holograms = new HashMap<>();
 
     @Override
-    public void updatePlayer(Player player, ChunkWrapper chunk) {
-        String world = chunk.world;
-        int bx = chunk.x << 4;
-        int bz = chunk.y << 4;
+    public void updatePlayer(Player player, ChunkWrapper chunkWrapper) {
+        String world = chunkWrapper.world;
+        int bx = chunkWrapper.x << 4;
+        int bz = chunkWrapper.y << 4;
         BlockVector3 pos1 = BlockVector3.at(bx - 1, 0, bz - 1);
         BlockVector3 pos2 = BlockVector3.at(bx + 16, 255, bz + 16);
         CuboidRegion region = new CuboidRegion(pos1, pos2);
@@ -36,12 +37,17 @@ public class PSHoloUtil implements IHoloUtil {
             return;
         }
         for (PlotArea area : areas) {
-            if (!(area instanceof GridPlotWorld gpw)) {
+            if (!(area instanceof GridPlotWorld gridPlotWorld)) {
                 continue;
             }
-            Plot plot = gpw.getOwnedPlotAbs(Location.at(area.getWorldName(), BlockVector3.at(bx, 0, bz + 1), 0, 0));
+            Plot plot = gridPlotWorld.getOwnedPlotAbs(Location.at(area.getWorldName(), BlockVector3.at(bx, 0, bz + 1), 0, 0));
             if (plot == null) {
-                plot = gpw.getOwnedPlotAbs(Location.at(area.getWorldName(), BlockVector3.at(pos2.getX(), 0, pos2.getZ() + 1), 0, 0));
+                plot = gridPlotWorld.getOwnedPlotAbs(Location.at(
+                        area.getWorldName(),
+                        BlockVector3.at(pos2.getX(), 0, pos2.getZ() + 1),
+                        0,
+                        0
+                ));
             }
             if (plot == null || !plot.isBasePlot()) {
                 continue;
@@ -94,7 +100,11 @@ public class PSHoloUtil implements IHoloUtil {
         if (name == null) {
             name = "unknown";
         }
-        return BukkitUtil.LEGACY_COMPONENT_SERIALIZER.serialize(BukkitUtil.MINI_MESSAGE.parse(caption.getComponent(LocaleHolder.console()), Template.of("id", id),
-            Template.of("owner", name))).replace("Claimed", plot.getOwnerAbs() == null ? "" : "Claimed");
+        return BukkitUtil.LEGACY_COMPONENT_SERIALIZER
+                .serialize(BukkitUtil.MINI_MESSAGE.parse(caption.getComponent(LocaleHolder.console()), Template.of("id", id),
+                        Template.of("owner", name)
+                ))
+                .replace("Claimed", plot.getOwnerAbs() == null ? "" : "Claimed");
     }
+
 }

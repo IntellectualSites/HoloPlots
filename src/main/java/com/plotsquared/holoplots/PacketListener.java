@@ -14,21 +14,22 @@ import org.bukkit.entity.Player;
 public class PacketListener {
 
     public PacketListener() {
-        final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+        final ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         PacketAdapter.AdapterParameteters mapChunkParam = new PacketAdapter.AdapterParameteters().optionAsync()
                 .types(PacketType.Play.Server.MAP_CHUNK).listenerPriority(ListenerPriority.NORMAL).plugin(
-                HoloPlotsPlugin.THIS);
-        manager.addPacketListener(new PacketAdapter(mapChunkParam) {
+                        HoloPlotsPlugin.THIS);
+        protocolManager.addPacketListener(new PacketAdapter(mapChunkParam) {
             @Override
-            public void onPacketSending(final PacketEvent event) {
-                final PacketContainer packet = event.getPacket();
-                final int x = packet.getIntegers().read(0);
-                final int z = packet.getIntegers().read(1);
-                final Player player = event.getPlayer();
+            public void onPacketSending(final PacketEvent packetEvent) {
+                final PacketContainer packetContainer = packetEvent.getPacket();
+                final int x = packetContainer.getIntegers().read(0);
+                final int z = packetContainer.getIntegers().read(1);
+                final Player player = packetEvent.getPlayer();
                 final ChunkWrapper chunk = new ChunkWrapper(x, z, player.getWorld().getName());
                 TaskManager.getPlatformImplementation().taskLater(() -> HoloPlotsPlugin.HOLO.updatePlayer(player, chunk), TaskTime
-                    .ticks(20));
+                        .ticks(20));
             }
         });
     }
+
 }

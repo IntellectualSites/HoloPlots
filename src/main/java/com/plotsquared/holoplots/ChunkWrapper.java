@@ -1,13 +1,14 @@
 package com.plotsquared.holoplots;
 
 public class ChunkWrapper {
+
     public final int x;
     public final int y;
     public final String world;
 
     /**
      * A representation of a chunk (x = chunkX y = chunkY, world = world name)
-     *
+     * <p>
      * to convert standard location to chunk:
      * x = locationX >> 4
      * y = locationZ >> 4
@@ -37,4 +38,5 @@ public class ChunkWrapper {
     public int hashCode() {
         return (this.y + this.world + this.x).hashCode();
     }
+
 }
