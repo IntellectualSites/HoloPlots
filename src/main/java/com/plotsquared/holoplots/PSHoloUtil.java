@@ -9,6 +9,7 @@ import com.plotsquared.core.configuration.caption.Caption;
 import com.plotsquared.core.configuration.caption.LocaleHolder;
 import com.plotsquared.core.configuration.caption.TranslatableCaption;
 import com.plotsquared.core.events.PlayerClaimPlotEvent;
+import com.plotsquared.core.events.PlotChangeOwnerEvent;
 import com.plotsquared.core.events.PlotDeleteEvent;
 import com.plotsquared.core.events.PlotMergeEvent;
 import com.plotsquared.core.generator.GridPlotWorld;
@@ -126,6 +127,20 @@ public class PSHoloUtil implements IHoloUtil {
     public void onPlotClaim(PlayerClaimPlotEvent e) {
         final Plot plot = e.getPlot();
         final UUID uuid = e.getPlotPlayer().getUUID();
+        TaskManager.runTaskLater(() -> {
+            Player p = Bukkit.getPlayer(uuid);
+            if (p == null) {
+                return;
+            }
+            Location loc = plot.getArea().getPlotManager().getSignLoc(plot);
+            updatePlayer(p, new ChunkWrapper(loc.getX() >> 4, loc.getZ() >> 4, loc.getWorldName()));
+        }, TaskTime.ticks(20));
+    }
+
+    @Subscribe
+    public void onPlotChangeOwner(PlotChangeOwnerEvent e) {
+        final Plot plot = e.getPlot();
+        final UUID uuid = e.getInitiator().getUUID();
         TaskManager.runTaskLater(() -> {
             Player p = Bukkit.getPlayer(uuid);
             if (p == null) {
