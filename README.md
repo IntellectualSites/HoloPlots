@@ -1,5 +1,5 @@
 # HoloPlots
-Holograms for PlotSquared Version v5 (1.13.2+)    
+Holograms for PlotSquared Version v6 (1.13.2+)    
 Spigot: https://www.spigotmc.org/resources/holoplots.4880/
 
 ## Dependencies
