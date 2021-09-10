@@ -1,4 +1,3 @@
-import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
@@ -14,6 +13,7 @@ the<JavaPluginExtension>().toolchain {
 }
 
 repositories {
+    mavenCentral()
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.plotsquared:PlotSquared-Bukkit:6.0.9-SNAPSHOT")
+    compileOnly("com.plotsquared:PlotSquared-Bukkit:6.1.0")
     compileOnlyApi("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
     compileOnly("com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.7.0")
