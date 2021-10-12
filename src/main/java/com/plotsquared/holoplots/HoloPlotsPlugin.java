@@ -32,6 +32,12 @@ public class HoloPlotsPlugin extends JavaPlugin {
         new PlotAPI().registerListener(HOLO);
     }
 
+    /**
+     * Create a new {@link ItemStack} for the head of a specific player.
+     *
+     * @param owner The {@link UUID} of the player for whose head should be created.
+     * @return The {@link ItemStack} for the player head.
+     */
     public ItemStack getPlayerSkull(UUID owner) {
         ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) itemStack.getItemMeta();
