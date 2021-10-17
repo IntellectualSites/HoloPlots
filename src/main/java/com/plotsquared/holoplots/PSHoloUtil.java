@@ -19,6 +19,7 @@ import com.plotsquared.core.plot.PlotArea;
 import com.plotsquared.core.plot.PlotId;
 import com.plotsquared.core.util.task.TaskManager;
 import com.plotsquared.core.util.task.TaskTime;
+import com.plotsquared.holoplots.config.Configuration;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import net.kyori.adventure.text.minimessage.Template;
@@ -112,6 +113,9 @@ public class PSHoloUtil implements IHoloUtil {
                     String line4 = translate(finalPlot, TranslatableCaption.of("signs.owner_sign_line_4"));
                     TaskManager.getPlatformImplementation().task(() -> {
                         hologram.clearLines();
+                        if (Configuration.SPAWN_PLAYER_HEAD && plot.hasOwner()) {
+                            hologram.appendItemLine(HoloPlotsPlugin.THIS.getPlayerSkull(finalPlot.getOwnerAbs()));
+                        }
                         hologram.appendTextLine(line1);
                         hologram.appendTextLine(line2);
                         hologram.appendTextLine(line3);
