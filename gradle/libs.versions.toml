@@ -3,7 +3,7 @@
 paper = "1.17.1-R0.1-SNAPSHOT"
 
 # Plugins
-plotsquared = "6.1.3"
+plotsquared = "6.1.4"
 worldedit = "7.2.7"
 holographicdisplays = "2.4.9"
 protocollib = "4.7.0"
