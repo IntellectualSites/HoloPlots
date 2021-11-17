@@ -12,7 +12,7 @@ the<JavaPluginExtension>().toolchain {
     languageVersion.set(JavaLanguageVersion.of(16))
 }
 
-version = "6.0.1-SNAPSHOT"
+version = "6.1.0"
 
 repositories {
     mavenCentral()
@@ -20,9 +20,14 @@ repositories {
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
     maven { url = uri("https://papermc.io/repo/repository/maven-public/") }
     maven { url = uri("https://repo.dmulloy2.net/nexus/repository/public/") }
-    maven { url = uri("https://jitpack.io") }
     maven { url = uri("https://maven.enginehub.org/repo/") }
-    maven { url = uri("https://mvn.intellectualsites.com/content/groups/public/") }
+    maven {
+        name = "IntellectualSites Snapshots"
+        url = uri("https://mvn.intellectualsites.com/content/repositories/snapshots/")
+        content {
+            includeModule("com.intellectualsites", "Pipeline")
+        }
+    }
 }
 
 dependencies {
