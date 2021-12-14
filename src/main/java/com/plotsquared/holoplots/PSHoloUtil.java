@@ -23,7 +23,6 @@ import com.plotsquared.holoplots.config.Configuration;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import net.kyori.adventure.text.minimessage.Template;
-import net.kyori.adventure.text.minimessage.template.TemplateResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -196,9 +195,8 @@ public class PSHoloUtil implements IHoloUtil {
             name = "unknown";
         }
         return BukkitUtil.LEGACY_COMPONENT_SERIALIZER
-                .serialize(BukkitUtil.MINI_MESSAGE.deserialize(caption.getComponent(LocaleHolder.console()),
-                        TemplateResolver.templates(Template.template("id", id),
-                        Template.template("owner", name))
+                .serialize(BukkitUtil.MINI_MESSAGE.parse(caption.getComponent(LocaleHolder.console()), Template.of("id", id),
+                        Template.of("owner", name)
                 ))
                 .replace("Claimed", plot.getOwnerAbs() == null ? "" : "Claimed");
     }
