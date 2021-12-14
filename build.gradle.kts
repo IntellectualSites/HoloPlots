@@ -12,7 +12,7 @@ the<JavaPluginExtension>().toolchain {
     languageVersion.set(JavaLanguageVersion.of(16))
 }
 
-version = "6.2.1-SNAPSHOT"
+version = "6.2.1"
 
 repositories {
     mavenCentral()
