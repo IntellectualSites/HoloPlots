@@ -1,9 +1,9 @@
 [versions]
 # Platform expectations
-paper = "1.17.1-R0.1-SNAPSHOT"
+paper = "1.18.1-R0.1-SNAPSHOT"
 
 # Plugins
-plotsquared = "6.2.1"
+plotsquared = "6.2.2"
 worldedit = "7.2.8"
 holographicdisplays = "2.4.9"
 protocollib = "4.7.0"
