@@ -24,19 +24,11 @@ version = "6.2.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://papermc.io/repo/repository/maven-public/") }
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
     maven { url = uri("https://papermc.io/repo/repository/maven-public/") }
     maven { url = uri("https://repo.dmulloy2.net/nexus/repository/public/") }
     maven { url = uri("https://maven.enginehub.org/repo/") }
-    maven {
-        name = "IntellectualSites Snapshots"
-        url = uri("https://mvn.intellectualsites.com/content/repositories/snapshots/")
-        content {
-            includeModule("com.intellectualsites", "Pipeline")
-        }
-    }
 }
 
 dependencies {
