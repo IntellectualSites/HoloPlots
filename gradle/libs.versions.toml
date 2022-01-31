@@ -9,7 +9,7 @@ holographicdisplays = "2.4.9"
 protocollib = "4.7.0"
 
 # Third party
-bstats = "2.2.1"
+bstats = "3.0.0"
 
 # Gradle plugins
 shadow = "7.1.2"
