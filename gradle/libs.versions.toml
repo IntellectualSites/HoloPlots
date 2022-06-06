@@ -1,33 +1,18 @@
 [versions]
-# Platform expectations
-paper = "1.18.1-R0.1-SNAPSHOT"
-
 # Plugins
-plotsquared = "6.8.1"
 worldedit = "7.2.10"
 holographicdisplays = "2.4.9"
 protocollib = "4.8.0"
-
-# Third party
-bstats = "3.0.0"
 
 # Gradle plugins
 shadow = "7.1.2"
 bukkityml = "0.5.1"
 
 [libraries]
-# Platform expectations
-paper = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
-
 # Plugins
-plotsquared = { group = "com.plotsquared", name = "PlotSquared-Bukkit", version.ref = "plotsquared" }
 worldedit = { group = "com.sk89q.worldedit", name = "worldedit-bukkit", version.ref = "worldedit" }
 holographicdisplays = { group = "com.gmail.filoghost.holographicdisplays", name = "holographicdisplays-api", version.ref = "holographicdisplays" }
 protocollib = { group = "com.comphenix.protocol", name = "ProtocolLib", version.ref = "protocollib" }
-
-# Third party
-bstatsBase = { group = "org.bstats", name = "bstats-base", version.ref = "bstats" }
-bstatsBukkit = { group = "org.bstats", name = "bstats-bukkit", version.ref = "bstats" }
 
 [plugins]
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }

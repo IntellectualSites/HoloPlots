@@ -32,13 +32,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly(libs.plotsquared)
-    compileOnly(libs.paper)
+    implementation(platform("com.intellectualsites.bom:bom-1.18.x:1.4"))
+    compileOnly("com.plotsquared:PlotSquared-Bukkit")
+    compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
     compileOnly(libs.protocollib)
     compileOnly(libs.worldedit)
-    implementation(libs.bstatsBukkit)
-    implementation(libs.bstatsBase)
+    implementation("org.bstats:bstats-bukkit")
+    implementation("org.bstats:bstats-base")
 }
 
 bukkit {
