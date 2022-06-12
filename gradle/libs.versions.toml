@@ -6,7 +6,7 @@ protocollib = "4.8.0"
 
 # Gradle plugins
 shadow = "7.1.2"
-bukkityml = "0.5.1"
+bukkityml = "0.5.2"
 
 [libraries]
 # Plugins
