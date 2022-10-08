@@ -144,6 +144,14 @@ public class PSHoloUtil implements IHoloUtil {
     @Subscribe
     public void onPlotChangeOwner(PlotChangeOwnerEvent e) {
         final Plot plot = e.getPlot();
+        UUID owner = plot.getOwnerAbs();
+        if (owner != null) {
+            HoloPlotID id = new HoloPlotID(e.getPlotId(), owner);
+            Hologram hologram = PSHoloUtil.holograms.remove(id);
+            if (hologram != null) {
+                hologram.delete();
+            }
+        }
         final UUID uuid = e.getInitiator().getUUID();
         TaskManager.runTaskLater(() -> {
             Player p = Bukkit.getPlayer(uuid);
