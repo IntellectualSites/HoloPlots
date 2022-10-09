@@ -149,7 +149,7 @@ public class PSHoloUtil implements IHoloUtil {
             HoloPlotID id = new HoloPlotID(e.getPlotId(), owner);
             Hologram hologram = PSHoloUtil.holograms.remove(id);
             if (hologram != null) {
-                hologram.delete();
+                hologram.clearLines();
             }
         }
         final UUID uuid = e.getInitiator().getUUID();
