@@ -143,15 +143,17 @@ public class PSHoloUtil implements IHoloUtil {
 
     @Subscribe
     public void onPlotChangeOwner(PlotChangeOwnerEvent e) {
-        final Plot plot = e.getPlot();
-        UUID owner = plot.getOwnerAbs();
-        if (owner != null) {
-            HoloPlotID id = new HoloPlotID(e.getPlotId(), owner);
+        // Info: The problem with just calling updatePlayer() is that the old owner UUID is unknown to that methode,
+        // so it can't find the hologram in the HashMap (different hash in the new HoloPlotID instance)
+        UUID oldOwner = e.getOldOwner();
+        if (oldOwner != null) {
+            HoloPlotID id = new HoloPlotID(e.getPlotId(), oldOwner);
             Hologram hologram = PSHoloUtil.holograms.remove(id);
             if (hologram != null) {
-                hologram.clearLines();
+                hologram.delete();
             }
         }
+        final Plot plot = e.getPlot();
         final UUID uuid = e.getInitiator().getUUID();
         TaskManager.runTaskLater(() -> {
             Player p = Bukkit.getPlayer(uuid);
