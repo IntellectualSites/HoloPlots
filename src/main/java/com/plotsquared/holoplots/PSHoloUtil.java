@@ -143,7 +143,7 @@ public class PSHoloUtil implements IHoloUtil {
 
     @Subscribe
     public void onPlotChangeOwner(PlotChangeOwnerEvent e) {
-        // Info: The problem with just calling updatePlayer() is that the old owner UUID is unknown to that methode,
+        // Info: The problem with just calling updatePlayer() is that the old owner UUID is unknown to that method,
         // so it can't find the hologram in the HashMap (different hash in the new HoloPlotID instance)
         UUID oldOwner = e.getOldOwner();
         if (oldOwner != null) {
