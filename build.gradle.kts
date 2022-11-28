@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.intellectualsites.bom:bom-1.18.x:1.19"))
+    implementation(platform("com.intellectualsites.bom:bom-1.18.x:1.20"))
     compileOnly("com.plotsquared:PlotSquared-Bukkit")
     compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
