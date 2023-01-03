@@ -29,6 +29,7 @@ repositories {
     maven { url = uri("https://papermc.io/repo/repository/maven-public/") }
     maven { url = uri("https://repo.dmulloy2.net/nexus/repository/public/") }
     maven { url = uri("https://maven.enginehub.org/repo/") }
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -36,7 +37,7 @@ dependencies {
     compileOnly("com.plotsquared:PlotSquared-Bukkit")
     compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
-    compileOnly(libs.protocollib)
+    compileOnly(libs.decentholograms)
     compileOnly(libs.worldedit)
     implementation("org.bstats:bstats-bukkit")
     implementation("org.bstats:bstats-base")
@@ -49,7 +50,8 @@ bukkit {
     apiVersion = "1.13"
     description = "Holographic Plot signs"
     version = rootProject.version.toString()
-    depend = listOf("HolographicDisplays", "PlotSquared", "ProtocolLib")
+    depend = listOf("PlotSquared")
+    softDepend = listOf("HolographicDisplays", "DecentHolograms")
     website = "https://www.spigotmc.org/resources/4880/"
 }
 
