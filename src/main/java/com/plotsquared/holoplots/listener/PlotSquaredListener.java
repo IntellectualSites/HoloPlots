@@ -80,7 +80,7 @@ public class PlotSquaredListener {
     public void onPostPlotUnlink(PostPlotUnlinkEvent event) {
         plugin.holoUtil().updatePlot(event.getPlot());
         synchronized (pendingUnlinks) {
-            final Pair<Long, Set<Plot>> result = pendingUnlinks.get(plugin.hashPlot(event.getPlot()));
+            final Pair<Long, Set<Plot>> result = pendingUnlinks.remove(plugin.hashPlot(event.getPlot()));
             if (result == null) {
                 return;
             }
