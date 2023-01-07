@@ -97,7 +97,7 @@ public class HoloPlotsPlugin extends JavaPlugin {
     }
 
     /**
-     * Packs the hash code of the PlotArea's name  and the hash code of the PlotId (int) itself into a long.
+     * Packs the hash code of the PlotArea's name and the hash code of the PlotId (X & Z coordinates) into a long.
      *
      * @param plot The plot to calculate the hash code into a long
      * @return The packed long based on the plot area's hash code and the plot id's hash code
@@ -106,11 +106,19 @@ public class HoloPlotsPlugin extends JavaPlugin {
         return (((long) Objects.requireNonNull(plot.getArea()).hashCode()) << 32) | (plot.hashCode() & 0xffffffffL);
     }
 
+    /**
+     * Attempts to translate a List of {@link Caption}s in parallel and returns them in their original order as a combined
+     * {@link CompletableFuture}
+     *
+     * @param plot     The plot context to translate for
+     * @param captions A list of captions to translate
+     * @return A {@link CompletableFuture} containing a list of translated {@link Component}s in original order
+     */
     public CompletableFuture<List<Component>> translateAll(Plot plot, List<Caption> captions) {
         List<CompletableFuture<Component>> futures = captions.stream().map(c -> translate(plot, c)).toList();
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new))
                 .thenApply(unused -> futures.stream()
-                        .map(f -> f.getNow(null))
+                        .map(CompletableFuture::join)
                         .filter(Objects::nonNull).toList()
                 );
     }
