@@ -4,7 +4,7 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.holoplots.HoloPlotsPlugin;
-import com.plotsquared.holoplots.provider.IHologramProvider;
+import com.plotsquared.holoplots.provider.HologramProvider;
 import it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.kyori.adventure.text.Component;
@@ -12,7 +12,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public class HolographicDisplaysProvider implements IHologramProvider {
+public class HolographicDisplaysProvider implements HologramProvider {
 
     public static final String PLUGIN_NAME = "HolographicDisplays";
 

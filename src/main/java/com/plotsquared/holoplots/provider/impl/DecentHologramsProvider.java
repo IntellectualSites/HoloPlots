@@ -2,7 +2,7 @@ package com.plotsquared.holoplots.provider.impl;
 
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.holoplots.HoloPlotsPlugin;
-import com.plotsquared.holoplots.provider.IHologramProvider;
+import com.plotsquared.holoplots.provider.HologramProvider;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import net.kyori.adventure.text.Component;
@@ -10,7 +10,7 @@ import org.bukkit.Location;
 
 import java.util.List;
 
-public class DecentHologramsProvider implements IHologramProvider {
+public class DecentHologramsProvider implements HologramProvider {
 
     public static final String PLUGIN_NAME = "DecentHolograms";
     private static final String HOLOGRAM_NAME_FORMAT = "HoloPlots__%s_%s_%s";

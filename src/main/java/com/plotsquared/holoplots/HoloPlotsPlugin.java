@@ -11,7 +11,7 @@ import com.plotsquared.core.util.task.TaskManager;
 import com.plotsquared.holoplots.config.Configuration;
 import com.plotsquared.holoplots.listener.ChunkListener;
 import com.plotsquared.holoplots.listener.PlotSquaredListener;
-import com.plotsquared.holoplots.provider.IHologramProvider;
+import com.plotsquared.holoplots.provider.HologramProvider;
 import com.plotsquared.holoplots.provider.impl.DecentHologramsProvider;
 import com.plotsquared.holoplots.provider.impl.HolographicDisplaysProvider;
 import net.kyori.adventure.text.Component;
@@ -42,14 +42,14 @@ public class HoloPlotsPlugin extends JavaPlugin {
     );
     private static final int BSTATS_ID = 6402;
 
-    private static final Map<String, Function<HoloPlotsPlugin, IHologramProvider>> SUPPORTED_PROVIDERS = Map.of(
+    private static final Map<String, Function<HoloPlotsPlugin, HologramProvider>> SUPPORTED_PROVIDERS = Map.of(
             HolographicDisplaysProvider.PLUGIN_NAME, HolographicDisplaysProvider::new,
             DecentHologramsProvider.PLUGIN_NAME, DecentHologramsProvider::new
     );
 
     private PSHoloUtil holoUtil;
 
-    private IHologramProvider provider;
+    private HologramProvider provider;
 
 
     @Override
@@ -57,7 +57,7 @@ public class HoloPlotsPlugin extends JavaPlugin {
         Configuration.load(new File(getDataFolder(), "settings.yml"), Configuration.class);
         Configuration.save(new File(getDataFolder(), "settings.yml"), Configuration.class);
 
-        for (final Map.Entry<String, Function<HoloPlotsPlugin, IHologramProvider>> entry : SUPPORTED_PROVIDERS.entrySet()) {
+        for (final Map.Entry<String, Function<HoloPlotsPlugin, HologramProvider>> entry : SUPPORTED_PROVIDERS.entrySet()) {
             if (Bukkit.getPluginManager().getPlugin(entry.getKey()) != null) {
                 this.provider = entry.getValue().apply(this);
                 break;
@@ -145,7 +145,7 @@ public class HoloPlotsPlugin extends JavaPlugin {
         }, TaskManager.getPlatformImplementation()::taskAsync);
     }
 
-    public IHologramProvider provider() {
+    public HologramProvider provider() {
         return provider;
     }
 

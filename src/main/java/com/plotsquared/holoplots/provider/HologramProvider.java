@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @since TODO
  */
-public interface IHologramProvider {
+public interface HologramProvider {
 
     LegacyComponentSerializer LEGACY_COMPONENT_SERIALIZER = LegacyComponentSerializer.legacySection();
 
