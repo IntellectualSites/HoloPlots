@@ -22,7 +22,7 @@ import java.util.Set;
 
 public class PlotSquaredListener {
 
-    private static final long PENDING_THRESHOLD = 1000 * 5; // the server has 5 seconds to clear and unlink the plots
+    private static final long PENDING_THRESHOLD = 1000 * 30; // the server has 30 seconds to clear and unlink the plots
 
     private final HoloPlotsPlugin plugin;
     private final Map<Long, Pair<Long, Set<Plot>>> pendingUnlinks = Collections.synchronizedMap(new HashMap<>());
