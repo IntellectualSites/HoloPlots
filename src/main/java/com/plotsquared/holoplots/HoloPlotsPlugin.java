@@ -43,8 +43,8 @@ public class HoloPlotsPlugin extends JavaPlugin {
     private static final int BSTATS_ID = 6402;
 
     private static final Map<String, Function<HoloPlotsPlugin, IHologramProvider>> SUPPORTED_PROVIDERS = Map.of(
-            "HolographicDisplays", HolographicDisplaysProvider::new,
-            "DecentHolograms", DecentHologramsProvider::new
+            HolographicDisplaysProvider.PLUGIN_NAME, HolographicDisplaysProvider::new,
+            DecentHologramsProvider.PLUGIN_NAME, DecentHologramsProvider::new
     );
 
     private PSHoloUtil holoUtil;

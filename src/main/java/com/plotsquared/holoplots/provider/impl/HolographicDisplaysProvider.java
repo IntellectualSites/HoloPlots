@@ -14,8 +14,9 @@ import java.util.List;
 
 public class HolographicDisplaysProvider implements IHologramProvider {
 
-    private final HoloPlotsPlugin plugin;
+    public static final String PLUGIN_NAME = "HolographicDisplays";
 
+    private final HoloPlotsPlugin plugin;
     private final Long2ObjectMap<Hologram> holograms = new Long2ObjectLinkedOpenHashMap<>();
 
     public HolographicDisplaysProvider(final HoloPlotsPlugin plugin) {
@@ -70,7 +71,7 @@ public class HolographicDisplaysProvider implements IHologramProvider {
 
     @Override
     public String getName() {
-        return "HolographicDisplays";
+        return PLUGIN_NAME;
     }
 
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class DecentHologramsProvider implements IHologramProvider {
 
+    public static final String PLUGIN_NAME = "DecentHolograms";
     private static final String HOLOGRAM_NAME_FORMAT = "HoloPlots__%s_%s_%s";
 
     private final HoloPlotsPlugin plugin;
@@ -63,7 +64,7 @@ public class DecentHologramsProvider implements IHologramProvider {
 
     @Override
     public String getName() {
-        return "DecentHolograms";
+        return PLUGIN_NAME;
     }
 
     private String formatHologramName(final Plot plot) {
