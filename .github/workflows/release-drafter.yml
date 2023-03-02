@@ -1,10 +1,8 @@
 name: draft release
-
 on:
   push:
     branches:
       - main
-
 jobs:
   update_release_draft:
     if: ${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}
