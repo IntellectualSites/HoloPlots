@@ -20,6 +20,13 @@ public class HoloPlotsPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (!Bukkit.getPluginManager().getPlugin("HolographicDisplays").getDescription().getVersion().startsWith("3")) {
+            getLogger().severe("HolographicDisplays 3.x is required for HoloPlots to work!");
+            getLogger().severe("Please update HolographicDisplays: https://dev.bukkit.org/projects/holographic-displays/files");
+            getLogger().severe("Disabling HoloPlots...");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
         HoloPlotsPlugin.THIS = this;
 
         Configuration.load(new File(getDataFolder(), "settings.yml"), Configuration.class);

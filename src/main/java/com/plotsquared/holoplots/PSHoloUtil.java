@@ -1,7 +1,5 @@
 package com.plotsquared.holoplots;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.google.common.eventbus.Subscribe;
 import com.plotsquared.bukkit.util.BukkitUtil;
 import com.plotsquared.core.PlotSquared;
@@ -22,6 +20,11 @@ import com.plotsquared.core.util.task.TaskTime;
 import com.plotsquared.holoplots.config.Configuration;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
+import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI;
+import me.filoghost.holographicdisplays.api.hologram.Hologram;
+import me.filoghost.holographicdisplays.api.hologram.VisibilitySettings;
+import me.filoghost.holographicdisplays.api.hologram.line.ItemHologramLine;
+import me.filoghost.holographicdisplays.api.hologram.line.TextHologramLine;
 import net.kyori.adventure.text.minimessage.Template;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -91,13 +94,14 @@ public class PSHoloUtil implements IHoloUtil {
                 HoloPlotID id = new HoloPlotID(plot.getId(), plot.getOwnerAbs());
 
                 final Hologram hologram;
+                HolographicDisplaysAPI api = HolographicDisplaysAPI.get(HoloPlotsPlugin.THIS);
                 if (!holograms.containsKey(id)) {
-                    hologram = HologramsAPI.createHologram(HoloPlotsPlugin.THIS, loc);
+                    hologram = api.createHologram(loc);
                     holograms.put(id, hologram);
                 } else {
                     Hologram holo = holograms.get(id);
                     if (holo.isDeleted()) {
-                        hologram = HologramsAPI.createHologram(HoloPlotsPlugin.THIS, loc);
+                        hologram = api.createHologram(loc);
                         holograms.replace(id, hologram);
                     } else {
                         hologram = holo;
@@ -112,15 +116,15 @@ public class PSHoloUtil implements IHoloUtil {
                     String line3 = translate(finalPlot, TranslatableCaption.of("signs.owner_sign_line_3"));
                     String line4 = translate(finalPlot, TranslatableCaption.of("signs.owner_sign_line_4"));
                     TaskManager.getPlatformImplementation().task(() -> {
-                        hologram.clearLines();
+                        hologram.getLines().clear();
                         if (Configuration.SPAWN_PLAYER_HEAD && plot.hasOwner()) {
-                            hologram.appendItemLine(HoloPlotsPlugin.THIS.getPlayerSkull(finalPlot.getOwnerAbs()));
+                            ItemHologramLine itemLine1 = hologram.getLines().appendItem(HoloPlotsPlugin.THIS.getPlayerSkull(finalPlot.getOwnerAbs()));
                         }
-                        hologram.appendTextLine(line1);
-                        hologram.appendTextLine(line2);
-                        hologram.appendTextLine(line3);
-                        hologram.appendTextLine(line4);
-                        hologram.getVisibilityManager().showTo(player);
+                        TextHologramLine textLine1 = hologram.getLines().appendText(line1);
+                        TextHologramLine textLine2 = hologram.getLines().appendText(line2);
+                        TextHologramLine textLine3 = hologram.getLines().appendText(line3);
+                        TextHologramLine textLine4 = hologram.getLines().appendText(line4);
+                        hologram.getVisibilitySettings().setIndividualVisibility(player, VisibilitySettings.Visibility.VISIBLE);
                     });
                 });
             }
