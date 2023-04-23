@@ -13,14 +13,14 @@ java {
 }
 
 tasks.compileJava.configure {
-    options.release.set(16)
+    options.release.set(17)
 }
 
 configurations.all {
     attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 17)
 }
 
-version = "6.2.2-SNAPSHOT"
+version = "6.3.0"
 
 repositories {
     mavenCentral()
