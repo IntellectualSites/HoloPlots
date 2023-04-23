@@ -1,5 +1,6 @@
 [versions]
 # Plugins
+worldedit = "7.2.14"
 holographicdisplays = "3.0.1"
 protocollib = "4.8.0"
 
