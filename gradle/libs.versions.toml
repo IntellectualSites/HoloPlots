@@ -2,7 +2,7 @@
 # Plugins
 worldedit = "7.2.14"
 holographicdisplays = "3.0.2"
-protocollib = "4.8.0"
+protocollib = "5.0.0"
 
 # Gradle plugins
 shadow = "8.1.1"
