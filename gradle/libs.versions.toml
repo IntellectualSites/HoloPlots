@@ -1,7 +1,7 @@
 [versions]
 # Plugins
 worldedit = "7.2.15"
-holographicdisplays = "3.0.2"
+holographicdisplays = "3.0.3"
 protocollib = "5.0.0"
 
 # Gradle plugins
