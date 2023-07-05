@@ -28,14 +28,11 @@ repositories {
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
     maven { url = uri("https://repo.dmulloy2.net/nexus/repository/public/") }
     maven { url = uri("https://maven.enginehub.org/repo/") }
-    // TODO remove once this is part of BOM
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    implementation(platform("com.intellectualsites.bom:bom-newest:1.29"))
-    // TODO remove version once this is part of BOM
-    compileOnly("com.intellectualsites.plotsquared:plotsquared-bukkit:7.0.0-SNAPSHOT")
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.31"))
+    compileOnly("com.intellectualsites.plotsquared:plotsquared-bukkit")
     compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
     compileOnly(libs.protocollib)
