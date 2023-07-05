@@ -25,7 +25,9 @@ import me.filoghost.holographicdisplays.api.hologram.Hologram;
 import me.filoghost.holographicdisplays.api.hologram.VisibilitySettings;
 import me.filoghost.holographicdisplays.api.hologram.line.ItemHologramLine;
 import me.filoghost.holographicdisplays.api.hologram.line.TextHologramLine;
-import net.kyori.adventure.text.minimessage.Template;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.tag.Tag;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -209,8 +211,9 @@ public class PSHoloUtil implements IHoloUtil {
             name = "unknown";
         }
         return BukkitUtil.LEGACY_COMPONENT_SERIALIZER
-                .serialize(BukkitUtil.MINI_MESSAGE.parse(caption.getComponent(LocaleHolder.console()), Template.of("id", id),
-                        Template.of("owner", name)
+                .serialize(BukkitUtil.MINI_MESSAGE.deserialize(caption.getComponent(LocaleHolder.console()),
+                        TagResolver.resolver("id", Tag.inserting(Component.text(id))),
+                        TagResolver.resolver("owner", Tag.inserting(Component.text(name)))
                 ))
                 .replace("Claimed", plot.getOwnerAbs() == null ? "" : "Claimed");
     }

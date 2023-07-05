@@ -20,6 +20,13 @@ public class HoloPlotsPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (!Bukkit.getPluginManager().getPlugin("PlotSquared").getDescription().getVersion().startsWith("7")) {
+            getLogger().severe("PlotSquared 7.x is required for HoloPlots to work!");
+            getLogger().severe("Please update PlotSquared: https://www.spigotmc.org/resources/77506/");
+            getLogger().severe("Disabling HoloPlots...");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
         if (!Bukkit.getPluginManager().getPlugin("HolographicDisplays").getDescription().getVersion().startsWith("3")) {
             getLogger().severe("HolographicDisplays 3.x is required for HoloPlots to work!");
             getLogger().severe("Please update HolographicDisplays: https://dev.bukkit.org/projects/holographic-displays/files");

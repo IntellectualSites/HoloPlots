@@ -20,7 +20,7 @@ configurations.all {
     attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 17)
 }
 
-version = "6.3.1-SNAPSHOT"
+version = "7.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -31,8 +31,8 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.intellectualsites.bom:bom-1.18.x:1.31"))
-    compileOnly("com.plotsquared:PlotSquared-Bukkit")
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.32"))
+    compileOnly("com.intellectualsites.plotsquared:plotsquared-bukkit")
     compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
     compileOnly(libs.protocollib)
