@@ -18,6 +18,10 @@ jobs:
           java-version: 17
       - name: Clean Build
         run: ./gradlew clean build
+      - name: Upload to Modrinth
+        run: ./gradlew clean build modrinth publishAllPublicationsToHangar
+        env:
+            MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       - name: Upload Release Assets
         uses: AButler/upload-release-assets@v2.0
         with:
