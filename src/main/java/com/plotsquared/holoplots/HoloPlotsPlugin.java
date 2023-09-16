@@ -18,6 +18,7 @@ public class HoloPlotsPlugin extends JavaPlugin {
     public static HoloPlotsPlugin THIS;
     public static IHoloUtil HOLO = null;
 
+    @SuppressWarnings("deprecation") // Paper deprecation
     @Override
     public void onEnable() {
         if (!Bukkit.getPluginManager().getPlugin("PlotSquared").getDescription().getVersion().startsWith("7")) {
