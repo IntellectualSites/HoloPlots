@@ -42,9 +42,9 @@ public class PSHoloUtil implements IHoloUtil {
 
     @Override
     public void updatePlayer(Player player, ChunkWrapper chunkWrapper) {
-        String world = chunkWrapper.world;
-        int bx = chunkWrapper.x << 4;
-        int bz = chunkWrapper.y << 4;
+        String world = chunkWrapper.world();
+        int bx = chunkWrapper.x() << 4;
+        int bz = chunkWrapper.y() << 4;
         BlockVector3 pos1 = BlockVector3.at(bx - 1, 0, bz - 1);
         BlockVector3 pos2 = BlockVector3.at(bx + 16, 255, bz + 16);
         CuboidRegion region = new CuboidRegion(pos1, pos2);

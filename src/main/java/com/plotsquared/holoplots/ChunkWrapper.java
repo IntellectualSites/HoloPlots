@@ -1,22 +1,17 @@
 package com.plotsquared.holoplots;
 
-public class ChunkWrapper {
-
-    public final int x;
-    public final int y;
-    public final String world;
+public record ChunkWrapper(int x, int y, String world) {
 
     /**
      * A representation of a chunk (x = chunkX y = chunkY, world = world name)
      * <p>
      * to convert standard location to chunk:
-     * x = locationX >> 4
-     * y = locationZ >> 4
+     * <ul>
+     * <li>x = locationX >> 4</li>
+     * <li>y = locationZ >> 4</li>
+     * </ul>
      */
-    public ChunkWrapper(final int x, final int y, final String world) {
-        this.x = x;
-        this.y = y;
-        this.world = world;
+    public ChunkWrapper {
     }
 
     @Override
