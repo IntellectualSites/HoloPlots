@@ -1,18 +1,15 @@
 package com.plotsquared.holoplots;
 
+/**
+ * A representation of a chunk (x = chunkX y = chunkY, world = world name)
+ * <p>
+ * to convert standard location to chunk:
+ * <ul>
+ * <li>x = locationX >> 4</li>
+ * <li>y = locationZ >> 4</li>
+ * </ul>
+ */
 public record ChunkWrapper(int x, int y, String world) {
-
-    /**
-     * A representation of a chunk (x = chunkX y = chunkY, world = world name)
-     * <p>
-     * to convert standard location to chunk:
-     * <ul>
-     * <li>x = locationX >> 4</li>
-     * <li>y = locationZ >> 4</li>
-     * </ul>
-     */
-    public ChunkWrapper {
-    }
 
     @Override
     public boolean equals(final Object object) {
