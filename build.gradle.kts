@@ -66,7 +66,7 @@ tasks.named("build").configure {
     dependsOn("shadowJar")
 }
 
-val supportedVersions = listOf("1.16.5", "1.17.1", "1.18.2", "1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1")
+val supportedVersions = listOf("1.16.5", "1.17.1", "1.18.2", "1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1", "1.20.2")
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))
