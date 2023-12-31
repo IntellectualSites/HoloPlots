@@ -5,6 +5,8 @@ import com.plotsquared.holoplots.config.Configuration;
 import com.plotsquared.holoplots.listener.ChunkListener;
 import com.plotsquared.holoplots.listener.PlotSquaredListener;
 import com.plotsquared.holoplots.provider.BukkitHologramProviderResolver;
+import com.plotsquared.holoplots.provider.impl.DecentHologramsProvider;
+import com.plotsquared.holoplots.provider.impl.HolographicDisplaysProvider;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
@@ -41,7 +43,12 @@ public class HoloPlotsPlugin extends JavaPlugin {
         // Enable metrics
         new Metrics(this, BSTATS_ID).addCustomChart(new SimplePie(
                 "hologram_provider",
-                () -> holoPlots.provider().getName()
+                () -> {
+                    if (holoPlots.provider() instanceof DecentHologramsProvider || holoPlots.provider() instanceof HolographicDisplaysProvider) {
+                        return holoPlots.provider().getName();
+                    }
+                    return null;
+                }
         ));
     }
 
