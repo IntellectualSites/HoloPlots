@@ -28,7 +28,12 @@ repositories {
     maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
     maven { url = uri("https://maven.enginehub.org/repo/") }
-    maven { url = uri("https://jitpack.io") }
+    maven {
+        url = uri("https://jitpack.io")
+        content {
+            includeGroup(libs.decentholograms.get().group)
+        }
+    }
 }
 
 dependencies {
