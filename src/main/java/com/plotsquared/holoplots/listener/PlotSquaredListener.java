@@ -30,7 +30,6 @@ public class PlotSquaredListener {
     private final HoloPlots holoPlots;
     private final Map<Long, Pair<Long, Set<Plot>>> pendingUnlinks = Collections.synchronizedMap(new HashMap<>());
 
-
     public PlotSquaredListener(HoloPlots holoPlots) {
         this.holoPlots = holoPlots;
         // clean up pending unlink operations
