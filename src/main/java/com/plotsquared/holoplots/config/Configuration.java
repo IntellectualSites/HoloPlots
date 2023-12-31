@@ -26,11 +26,23 @@ public class Configuration extends Config {
     @Comment("Determines the offset on the y-axis from the signs location where the hologram should spawn")
     public static int OFFSET = 6;
 
+    @Comment({
+            "The skull to be shown if the plot is owned by the server (as defined by the server-plot flag).",
+            "If no skull should be shown in that case, keep this field empty.",
+            "Supports the Base64 encoded texture value (starting with 'ey...')",
+            "and the minecraft texture url."
+    })
     public static String SKULL_SERVER_OWNED = "";
 
     @Ignore
     public static ConfigurableSkullTexture SKULL_SERVER_OWNED_PARSED;
 
+    @Comment({
+            "The skull to be shown if the plot is owned by the everyone ('*').",
+            "If no skull should be shown in that case, keep this field empty.",
+            "Supports the Base64 encoded texture value (starting with 'ey...')",
+            "and the minecraft texture url."
+    })
     public static String SKULL_EVERYONE_OWNED = "";
 
     @Ignore
