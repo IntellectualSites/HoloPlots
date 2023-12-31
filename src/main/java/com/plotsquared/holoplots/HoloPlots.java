@@ -29,16 +29,6 @@ public interface HoloPlots {
     @NonNull HologramProvider provider();
 
     /**
-     * Packs a {@link Plot} kinda-unique into a long by putting the {@link com.plotsquared.core.plot.PlotArea
-     * PlotAreas} hash code into the first 4 bytes of the long and the {@link com.plotsquared.core.plot.PlotId PlotIds} hash
-     * code into the following / last 4 bytes.
-     *
-     * @param plot The plot to hash "uniquely" across multiple worlds / {@link com.plotsquared.core.plot.PlotArea PlotAreas}
-     * @return The hash of the plot
-     */
-    long hashPlot(@NonNull Plot plot);
-
-    /**
      * Translates all lines as defined in {@link com.plotsquared.holoplots.config.Configuration#LINES}.
      * <p>
      * If one of the lines does not exist in the {@link com.plotsquared.core.configuration.caption.CaptionMap} it'll be treated

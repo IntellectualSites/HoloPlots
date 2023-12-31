@@ -76,11 +76,6 @@ public class DefaultHoloPlots implements HoloPlots {
     }
 
     @Override
-    public long hashPlot(@NonNull final Plot plot) {
-        return (((long) Objects.requireNonNull(plot.getArea()).hashCode()) << 32) | (plot.hashCode() & 0xffffffffL);
-    }
-
-    @Override
     public @NonNull List<@NonNull Component> translateLines(@NonNull final Plot plot, @Nullable final Caption username) throws
             NullPointerException {
         // Translate all translatable lines, or just store the raw config value

@@ -3,8 +3,8 @@ package com.plotsquared.holoplots.provider.impl;
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.holoplots.HoloPlots;
 import com.plotsquared.holoplots.provider.HologramProvider;
-import it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI;
 import me.filoghost.holographicdisplays.api.hologram.Hologram;
 import net.kyori.adventure.text.Component;
@@ -20,7 +20,7 @@ public class HolographicDisplaysProvider implements HologramProvider {
     public static final String PLUGIN_NAME = "HolographicDisplays";
 
     private final HoloPlots holoPlots;
-    private final Long2ObjectMap<Hologram> holograms = new Long2ObjectLinkedOpenHashMap<>();
+    private final Object2ObjectMap<Plot, Hologram> holograms = new Object2ObjectOpenHashMap<>();
 
     private final HolographicDisplaysAPI api;
 
@@ -41,17 +41,17 @@ public class HolographicDisplaysProvider implements HologramProvider {
         for (final Component line : lines) {
             hologram.getLines().appendText(LEGACY_COMPONENT_SERIALIZER.serialize(line));
         }
-        holograms.put(holoPlots.hashPlot(plot), hologram);
+        holograms.put(plot, hologram);
     }
 
     @Override
     public boolean updateHologram(final Plot plot, final List<Component> lines, @Nullable final ItemStack skull) {
-        final Hologram hologram = holograms.get(holoPlots.hashPlot(plot));
+        final Hologram hologram = holograms.get(plot);
         if (hologram == null) {
             return false;
         }
         if (hologram.isDeleted()) {
-            holograms.remove(holoPlots.hashPlot(plot));
+            holograms.remove(plot);
             return false;
         }
         // The easiest way is to clear the lines and create new ones
@@ -67,7 +67,7 @@ public class HolographicDisplaysProvider implements HologramProvider {
 
     @Override
     public boolean removeHologram(final Plot plot) {
-        final Hologram hologram = holograms.remove(holoPlots.hashPlot(plot));
+        final Hologram hologram = holograms.remove(plot);
         if (hologram == null) {
             return false;
         }

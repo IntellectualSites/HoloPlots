@@ -28,12 +28,12 @@ public class PlotSquaredListener {
     private static final long PENDING_THRESHOLD = 1000 * 60; // the server has 60 seconds to clear and unlink the plots
 
     private final HoloPlots holoPlots;
-    private final Map<Long, Pair<Long, Set<Plot>>> pendingUnlinks = Collections.synchronizedMap(new HashMap<>());
+    private final Map<Plot, Pair<Long, Set<Plot>>> pendingUnlinks = Collections.synchronizedMap(new HashMap<>());
 
     public PlotSquaredListener(HoloPlots holoPlots) {
         this.holoPlots = holoPlots;
         // clean up pending unlink operations
-        TaskManager.getPlatformImplementation().taskRepeat(() -> {
+        TaskManager.runTaskRepeat(() -> {
             synchronized (pendingUnlinks) {
                 pendingUnlinks.entrySet().removeIf(longPairEntry -> longPairEntry
                         .getValue().left() + PENDING_THRESHOLD > System.currentTimeMillis());
@@ -74,7 +74,7 @@ public class PlotSquaredListener {
     public void onPlotUnlink(PlotUnlinkEvent event) {
         Set<Plot> plots = new HashSet<>(event.getPlot().getConnectedPlots());
         synchronized (pendingUnlinks) {
-            pendingUnlinks.put(this.holoPlots.hashPlot(event.getPlot()), Pair.of(System.currentTimeMillis(), plots));
+            pendingUnlinks.put(event.getPlot(), Pair.of(System.currentTimeMillis(), plots));
         }
     }
 
@@ -82,7 +82,7 @@ public class PlotSquaredListener {
     public void onPostPlotUnlink(PostPlotUnlinkEvent event) {
         this.holoPlots.updatePlot(event.getPlot());
         synchronized (pendingUnlinks) {
-            final Pair<Long, Set<Plot>> result = pendingUnlinks.remove(this.holoPlots.hashPlot(event.getPlot()));
+            final Pair<Long, Set<Plot>> result = pendingUnlinks.remove(event.getPlot());
             if (result == null) {
                 return;
             }
