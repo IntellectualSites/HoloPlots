@@ -7,15 +7,16 @@ This is an official PlotSquared addon which creates holograms by the sign locati
 
 The download is available at [Modrinth](https://modrinth.com/mod/holoplots).
 
-This addon requires PlotSquared, HolograhpicDisplays and ProtocolLib to be installed. You can get them below:
+This addon requires PlotSquared and HolograhpicDisplays or DecentHolograms to be installed. You can get them below:
 
 - [PlotSquared](https://www.spigotmc.org/resources/77506/)
 - [HolographicDisplays](https://dev.bukkit.org/projects/holographic-displays/files)
-- [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)
+- [DecentHolograms](https://www.spigotmc.org/resources/96927)
 
 ## Configuration
 
-Change the sign text in the PlotSquared translation file to modify the created Holograms.
+By default, the holograms will contain the text which is by default on the plot signs.
+The line content, offset and placeholder skulls for special plots may be configured.
 
 ## Preview
 
