@@ -2,7 +2,8 @@
 # Plugins
 worldedit = "7.2.16"
 holographicdisplays = "3.0.3"
-protocollib = "5.1.0"
+decentholograms = "2.8.5"
+paperlib = "1.0.1"
 
 # Gradle plugins
 shadow = "8.1.1"
@@ -13,7 +14,8 @@ minotaur = "2.8.4"
 # Plugins
 worldedit = { group = "com.sk89q.worldedit", name = "worldedit-bukkit", version.ref = "worldedit" }
 holographicdisplays = { group = "me.filoghost.holographicdisplays", name = "holographicdisplays-api", version.ref = "holographicdisplays" }
-protocollib = { group = "com.comphenix.protocol", name = "ProtocolLib", version.ref = "protocollib" }
+decentholograms = { group = "com.github.decentsoftware-eu", name = "decentholograms", version.ref = "decentholograms" }
+paperlib = { group = "io.papermc", name = "paperlib", version.ref = "paperlib" }
 
 [plugins]
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }

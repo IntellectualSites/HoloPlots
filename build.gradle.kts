@@ -27,17 +27,23 @@ repositories {
     mavenCentral()
     maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
     maven { url = uri("https://repo.codemc.io/repository/maven-public/") }
-    maven { url = uri("https://repo.dmulloy2.net/nexus/repository/public/") }
     maven { url = uri("https://maven.enginehub.org/repo/") }
+    maven {
+        url = uri("https://jitpack.io")
+        content {
+            includeGroup(libs.decentholograms.get().group)
+        }
+    }
 }
 
 dependencies {
-    implementation(platform("com.intellectualsites.bom:bom-newest:1.38"))
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.40"))
     compileOnly("com.intellectualsites.plotsquared:plotsquared-bukkit")
     compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
-    compileOnly(libs.protocollib)
+    compileOnly(libs.decentholograms)
     compileOnly(libs.worldedit)
+    implementation(libs.paperlib)
     implementation("org.bstats:bstats-bukkit")
     implementation("org.bstats:bstats-base")
 }
@@ -49,7 +55,8 @@ bukkit {
     apiVersion = "1.13"
     description = "Holographic Plot signs"
     version = rootProject.version.toString()
-    depend = listOf("HolographicDisplays", "PlotSquared", "ProtocolLib")
+    depend = listOf("PlotSquared")
+    softDepend = listOf("DecentHolograms", "HolographicDisplays")
     website = "https://www.spigotmc.org/resources/4880/"
 }
 
@@ -58,6 +65,8 @@ tasks.named<ShadowJar>("shadowJar") {
     dependencies {
         relocate("org.bstats", "com.plotsquared.holoplots.metrics")
         relocate("net.kyori.adventure", "com.plotsquared.core.configuration.adventure")
+        relocate("net.kyori.options", "com.plotsquared.core.configuration.options")
+        relocate("io.papermc.lib", "com.plotsquared.holoplots.paperlib")
     }
     minimize()
 }
