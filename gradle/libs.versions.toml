@@ -3,7 +3,7 @@
 worldedit = "7.2.18"
 holographicdisplays = "3.0.3"
 decentholograms = "2.8.5"
-paperlib = "1.0.1"
+paperlib = "1.0.8"
 
 # Gradle plugins
 shadow = "8.1.1"
