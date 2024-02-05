@@ -2,7 +2,7 @@
 # Plugins
 worldedit = "7.2.18"
 holographicdisplays = "3.0.5"
-decentholograms = "2.8.5"
+decentholograms = "2.8.6"
 paperlib = "1.0.8"
 
 # Gradle plugins
