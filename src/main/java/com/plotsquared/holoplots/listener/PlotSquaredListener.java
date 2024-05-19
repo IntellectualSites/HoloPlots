@@ -7,6 +7,7 @@ import com.plotsquared.core.events.PlotFlagAddEvent;
 import com.plotsquared.core.events.PlotFlagRemoveEvent;
 import com.plotsquared.core.events.PlotUnlinkEvent;
 import com.plotsquared.core.events.post.PostPlayerAutoPlotEvent;
+import com.plotsquared.core.events.post.PostPlayerBuyPlotEvent;
 import com.plotsquared.core.events.post.PostPlotDeleteEvent;
 import com.plotsquared.core.events.post.PostPlotMergeEvent;
 import com.plotsquared.core.events.post.PostPlotUnlinkEvent;
@@ -104,4 +105,10 @@ public class PlotSquaredListener {
             TaskManager.runTaskLater(() -> this.holoPlots.updatePlot(event.getPlot()), TaskTime.ticks(20));
         }
     }
+
+    @Subscribe
+    public void onPostPlayerBuyPlot(PostPlayerBuyPlotEvent event) {
+        this.holoPlots.updatePlot(event.getPlot());
+    }
+
 }
