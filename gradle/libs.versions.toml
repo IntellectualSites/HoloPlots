@@ -1,6 +1,6 @@
 [versions]
 # Plugins
-worldedit = "7.3.0"
+worldedit = "7.3.3"
 holographicdisplays = "3.0.5"
 decentholograms = "2.8.8"
 paperlib = "1.0.8"
