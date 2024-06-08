@@ -6,5 +6,8 @@
   ],
   "automerge": true,  
   "labels": ["Renovate"],
-  "rebaseWhen": "conflicted"
+  "rebaseWhen": "conflicted",
+  "ignoreDeps": [
+    "com.sk89q.worldedit:worldedit-bukkit"
+  ]
 }
