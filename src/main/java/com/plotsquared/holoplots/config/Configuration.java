@@ -23,8 +23,14 @@ public class Configuration extends Config {
             "signs.owner_sign_line_4"
     );
 
+    @Comment("Determines the offset on the x-axis from the signs location where the hologram should spawn")
+    public static int OFFSET_X = 0;
+
     @Comment("Determines the offset on the y-axis from the signs location where the hologram should spawn")
-    public static int OFFSET = 6;
+    public static int OFFSET_Y = 6;
+
+    @Comment("Determines the offset on the z-axis from the signs location where the hologram should spawn")
+    public static int OFFSET_Z = 0;
 
     @Comment({
             "The skull to be shown if the plot is owned by the server (as defined by the server-plot flag).",
