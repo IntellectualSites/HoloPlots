@@ -10,12 +10,12 @@ plugins {
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 tasks {
     compileJava.configure {
-        options.release.set(17)
+        options.release.set(21)
     }
 
     withType<AbstractArchiveTask>().configureEach {
@@ -26,7 +26,7 @@ tasks {
 
 
 configurations.all {
-    attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 17)
+    attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 21)
 }
 
 version = "7.1.2-SNAPSHOT"
@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.intellectualsites.bom:bom-newest:1.47"))
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.55"))
     compileOnly("com.intellectualsites.plotsquared:plotsquared-bukkit")
     compileOnly("io.papermc.paper:paper-api")
     compileOnly(libs.holographicdisplays)
@@ -83,7 +83,7 @@ tasks.named("build").configure {
     dependsOn("shadowJar")
 }
 
-val supportedVersions = listOf("1.16.5", "1.17.1", "1.18.2", "1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1", "1.20.2")
+val supportedVersions = listOf("1.20.1", "1.20.2", "1.21.10")
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))
