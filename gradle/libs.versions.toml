@@ -6,7 +6,7 @@ decentholograms = "2.9.7"
 paperlib = "1.0.8"
 
 # Gradle plugins
-shadow = "9.2.2"
+shadow = "9.3.0"
 bukkityml = "0.6.0"
 minotaur = "2.8.10"
 
