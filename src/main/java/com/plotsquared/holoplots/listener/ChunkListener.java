@@ -44,15 +44,28 @@ public class ChunkListener implements org.bukkit.event.Listener {
             if (!(area instanceof GridPlotWorld gridPlotWorld)) {
                 continue;
             }
-            PlotId top = gridPlotWorld.getPlotManager().getPlotIdAbs(bx + 15, 0, bz + 15);
-            if (top == null) { //Top corner of plot, or assume entirely road
-                continue;
+
+            Set<Plot> seen = new HashSet<>();
+            int[][] corners = {{bx, bz}, {bx + 15, bz}, {bx, bz + 15}, {bx + 15, bz + 15}};
+            for (int[] corner : corners) {
+                PlotId plotId = gridPlotWorld.getPlotManager().getPlotIdAbs(corner[0], 0, corner[1]);
+                if (plotId == null) {
+                    continue;
+                }
+                Plot plot = gridPlotWorld.getPlotAbs(plotId);
+                // Because we check for 4 corners, the same plot may be returned multiple times, so we keep track of which ones we've already processed
+                if (plot == null || !seen.add(plot)) {
+                    continue;
+                }
+
+                // Only process if the plot's sign location falls within this chunk,
+                // preventing the same plot from being processed by multiple chunk events
+                Location signLoc = gridPlotWorld.getPlotManager().getSignLoc(plot);
+                if (signLoc.getX() >> 4 != chunk.getX() || signLoc.getZ() >> 4 != chunk.getZ()) {
+                    continue;
+                }
+                consumer.accept(plot);
             }
-            Plot plot = gridPlotWorld.getPlotAbs(top);
-            if (plot == null) {
-                continue;
-            }
-            consumer.accept(plot);
         }
     }
 
