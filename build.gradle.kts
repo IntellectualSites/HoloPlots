@@ -60,7 +60,7 @@ bukkit {
     name = "HoloPlots"
     main = "com.plotsquared.holoplots.HoloPlotsPlugin"
     authors = listOf("Empire92", "NotMyFault", "dordsor21")
-    apiVersion = "1.13"
+    apiVersion = "1.19"
     description = "Holographic Plot signs"
     version = rootProject.version.toString()
     depend = listOf("PlotSquared")
@@ -83,7 +83,7 @@ tasks.named("build").configure {
     dependsOn("shadowJar")
 }
 
-val supportedVersions = listOf("1.20.1", "1.20.2", "1.21.10")
+val supportedVersions = listOf("1.20.1", "1.20.2", "1.21.11", "26.1.2", "26.2")
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))

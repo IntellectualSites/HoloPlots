@@ -11,6 +11,12 @@ public class Configuration extends Config {
     public static boolean SPAWN_PLAYER_HEAD = true;
 
     @Comment({
+            "Set to true, if the textures for the floating player head should be resolved by the client instead of the server",
+            "Requires Paper 1.21.7+"
+    })
+    public static boolean USE_RESOLVABLE_PLAYER_PROFILES = true;
+
+    @Comment({
             "All lines that will be rendered underneath each other as the plot hologram.",
             "May either reference strings from the PlotSquared message file itself (like 'signs.owner_sign_line_1')",
             "or a plain text message, which supports MiniMessage format.",
@@ -24,7 +30,7 @@ public class Configuration extends Config {
     );
 
     @Comment("Determines the offset on the y-axis from the signs location where the hologram should spawn")
-    public static int OFFSET = 6;
+    public static int OFFSET = 3;
 
     @Comment({
             "The skull to be shown if the plot is owned by the server (as defined by the server-plot flag).",
