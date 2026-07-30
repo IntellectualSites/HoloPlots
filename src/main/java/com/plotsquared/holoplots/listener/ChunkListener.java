@@ -45,11 +45,11 @@ public class ChunkListener implements org.bukkit.event.Listener {
                 continue;
             }
 
-            Set<Plot> seen = new HashSet<>();
+            Set<PlotId> seen = new HashSet<>();
             int[][] corners = {{bx, bz}, {bx + 15, bz}, {bx, bz + 15}, {bx + 15, bz + 15}};
             for (int[] corner : corners) {
                 PlotId plotId = gridPlotWorld.getPlotManager().getPlotIdAbs(corner[0], 0, corner[1]);
-                if (plotId == null) {
+                if (plotId == null || !seen.add(plotId)) {
                     continue;
                 }
                 Plot plot = gridPlotWorld.getPlotAbs(plotId);
@@ -65,6 +65,7 @@ public class ChunkListener implements org.bukkit.event.Listener {
                     continue;
                 }
                 consumer.accept(plot);
+                break;
             }
         }
     }
