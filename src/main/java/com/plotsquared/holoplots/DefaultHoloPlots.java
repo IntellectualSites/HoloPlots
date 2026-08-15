@@ -1,6 +1,7 @@
 package com.plotsquared.holoplots;
 
 import com.plotsquared.core.PlotSquared;
+import com.plotsquared.core.configuration.Settings;
 import com.plotsquared.core.configuration.caption.Caption;
 import com.plotsquared.core.configuration.caption.CaptionMap;
 import com.plotsquared.core.configuration.caption.LocaleHolder;
@@ -15,6 +16,8 @@ import com.plotsquared.holoplots.config.Configuration;
 import com.plotsquared.holoplots.provider.HologramProvider;
 import com.plotsquared.holoplots.provider.HologramProviderResolver;
 import io.papermc.lib.PaperLib;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.Tag;
@@ -25,6 +28,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -39,6 +43,7 @@ import java.util.logging.Logger;
 public class DefaultHoloPlots implements HoloPlots {
 
     private static final String META_KEY_HOLOGRAM_UPDATE = "holoplots__pending_update";
+    private static final boolean PAPER = PaperLib.isPaper();
 
     private final HoloPlotsPlugin plugin;
     private final HologramProvider provider;
@@ -46,21 +51,17 @@ public class DefaultHoloPlots implements HoloPlots {
 
     public DefaultHoloPlots(final HoloPlotsPlugin plugin, final HologramProviderResolver resolver) {
         this.plugin = plugin;
-        this.provider = resolver.findProvider(this).orElseThrow(() -> {
-            Bukkit.getPluginManager().disablePlugin(plugin);
-            return new NullPointerException("Missing provider for spawning holograms. " +
-                    "Check https://github.com/IntellectualSites/HoloPlots for more information"
-            );
-        });
+        this.provider = resolver.findProvider(this).orElseThrow(() -> new IllegalStateException(
+                "Missing provider for spawning holograms. Check https://github.com/IntellectualSites/HoloPlots for more information"));
         //noinspection deprecation - paper deprecation, compatibility with spigot
         String requiredVersion = this.provider.validateVersion(Objects.requireNonNull(Bukkit.getPluginManager()
                 .getPlugin(this.provider.getName())).getDescription().getVersion());
         if (requiredVersion != null) {
-            logger().severe(this.provider.getName() + " " + requiredVersion + " is required for HoloPlots to work!");
-            logger().severe("Please update " + this.provider.getName() + " by checking out their download links at: " +
-                    "https://github.com/IntellectualSites/HoloPlots");
-            logger().severe("Disabling HoloPlots...");
-            Bukkit.getPluginManager().disablePlugin(plugin);
+            throw new IllegalStateException(
+                    this.provider.getName() + " " + requiredVersion + " is required for HoloPlots to work!" +
+                            "Please update " + this.provider.getName() + " by checking out their download links at: " +
+                            "https://github.com/IntellectualSites/HoloPlots"
+            );
         }
 
     }
@@ -111,6 +112,7 @@ public class DefaultHoloPlots implements HoloPlots {
     }
 
     @Override
+    @SuppressWarnings("PatternValidation") // paper adds pattern annotations to method parameters for usernames...
     public @Nullable ItemStack createOwnerSkull(@NonNull final UUID ownerUuid, @Nullable final String username) {
         if (Objects.equals(ownerUuid, DBFunc.SERVER)) {
             return Configuration.SKULL_SERVER_OWNED_PARSED.itemStack();
@@ -121,7 +123,20 @@ public class DefaultHoloPlots implements HoloPlots {
         if (!Configuration.SPAWN_PLAYER_HEAD) {
             return null;
         }
+
+        // TODO: replace with PS MinecraftVersion class
+        int[] version = PlotSquared.platform().serverVersion();
+
         final ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
+
+        // if supported, let the client resolve the texture
+        if (Configuration.USE_RESOLVABLE_PLAYER_PROFILES && PAPER &&
+                (version[0] >= 26 || version[1] > 21 || (version[1] == 21 && version[2] >= 7))) {
+            // noinspection UnstableApiUsage - experimental but recommended by Paper team (and only way to do this),PatternValidation
+            skull.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile().uuid(ownerUuid).name(username));
+            return skull;
+        }
+
         final SkullMeta meta = (SkullMeta) skull.getItemMeta();
         final OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(ownerUuid);
         // OfflinePlayer could be resolved from playercache and can easily be used for texture assigning
@@ -132,20 +147,18 @@ public class DefaultHoloPlots implements HoloPlots {
         }
 
         if (username == null) {
-            throw new NullPointerException("Require username for further skull generation but was null");
+            logger().severe("Attempted to create player head, but username required for fallback method is null");
+            return null;
         }
 
-        if (PaperLib.isPaper()) {
-            meta.setPlayerProfile(Bukkit.createProfile(ownerUuid, username));
-        } else if (PlotSquared.platform().serverVersion()[1] >= 19) {
-            // Starting from 1.19 spigot natively supports setting the skull owner by (Game)Profiles
-            //noinspection deprecation - paper deprecation
-            meta.setOwnerProfile(Bukkit.createProfile(ownerUuid, username));
-        } else {
-            // If there is no supported method, gamble by setting the owner via its name and hope for the best
-            //noinspection deprecation - "valid" fallback
-            meta.setOwner(username);
-        }
+        // create profile in offline mode exact (case-sensitive names) or ignoring username case sensitivity
+        // noinspection deprecation - Paper has its own PlayerProfile, extending the Bukkit PlayerProfile
+        PlayerProfile profile = Settings.UUID.OFFLINE && !Settings.UUID.FORCE_LOWERCASE ?
+                Bukkit.createProfileExact(ownerUuid, username) :
+                Bukkit.createProfile(ownerUuid, username);
+
+        // noinspection deprecation - paper deprecation, should call Papers `setPlayerProfile` internally
+        meta.setOwnerProfile(profile);
         skull.setItemMeta(meta);
         return skull;
     }
