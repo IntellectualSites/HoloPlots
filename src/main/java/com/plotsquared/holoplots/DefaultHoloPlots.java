@@ -167,7 +167,8 @@ public class DefaultHoloPlots implements HoloPlots {
             return;
         }
         final org.bukkit.Location hologramLocation = new org.bukkit.Location(
-                world, signLocation.getX() + .5, signLocation.getY() + Configuration.OFFSET, signLocation.getZ() + .5
+                world, signLocation.getX() + .5 + Configuration.OFFSET_X, signLocation.getY() + Configuration.OFFSET_Y,
+                signLocation.getZ() + .5 + Configuration.OFFSET_Z
         );
 
         // Cancel potential pending update which is still loading metadata, as we want the newest change to have the highest
