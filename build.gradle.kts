@@ -70,12 +70,10 @@ bukkit {
 
 tasks.named<ShadowJar>("shadowJar") {
     archiveClassifier.set(null as String?)
-    dependencies {
-        relocate("org.bstats", "com.plotsquared.holoplots.metrics")
-        relocate("net.kyori.adventure", "com.plotsquared.core.configuration.adventure")
-        relocate("net.kyori.options", "com.plotsquared.core.configuration.options")
-        relocate("io.papermc.lib", "com.plotsquared.holoplots.paperlib")
-    }
+    relocate("org.bstats", "com.plotsquared.holoplots.metrics")
+    relocate("net.kyori.adventure", "com.plotsquared.core.configuration.adventure")
+    relocate("net.kyori.options", "com.plotsquared.core.configuration.options")
+    relocate("io.papermc.lib", "com.plotsquared.holoplots.paperlib")
     minimize()
 }
 
