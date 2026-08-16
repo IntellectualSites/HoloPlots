@@ -29,7 +29,7 @@ configurations.all {
     attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 21)
 }
 
-version = "7.1.2-SNAPSHOT"
+version = "7.1.2"
 
 repositories {
     mavenCentral()
